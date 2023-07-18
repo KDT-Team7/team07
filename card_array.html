@@ -35,7 +35,7 @@
       }
       .container {
         position: absolute;
-        top: 200px;
+        top: 150px;
         left: 5%;
         width: 100%;
         z-index: 1;
@@ -75,6 +75,11 @@
     </style>
     <style>
       /* box크기 조정 (임의) */
+
+      .box0 {
+        height: 250px;
+        margin-bottom: 10px;
+      }
       .box1 {
         height: 500px;
         margin-bottom: 15px;
@@ -93,7 +98,7 @@
       }
       /* banner 사이즈 조정 */
       .banner {
-        height: 20vh;
+        height: 10vh;
         display: flex;
         justify-content: center;
         position: relative;
@@ -149,6 +154,9 @@
       <!-- box 배열-->
       <div class="container">
         <div class="row">
+          <div class="col-sm-6 col-lg-12 mb-1">
+            <div class="box box0" onclick="buttonClicked()"></div>
+          </div>
           <!-- main box -->
           <div class="col-sm-6 col-lg-6 mb-1">
             <div class="box box1" onclick="buttonClicked()"></div>
