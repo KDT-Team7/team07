@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/b08ebf6beb.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        padding: 0px;
+        margin: 0px;
+      }
+      .jb-box {
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+        margin: 0px auto;
+        position: relative;
+      }
+      video {
+        width: 100%;
+      }
+      .jb-text {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+      }
+      .jb-text p {
+        margin-top: -24px;
+        text-align: center;
+        font-size: 48px;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="jb-box" id="box">
+      <div class="jb-text">
+        <p>Lorem Ipsum Dolor</p>
+      </div>
+    </div>
+    <h1>Current Weather</h1>
+    <div id="weather-info">
+      <p>Loading...</p>
+    </div>
+    <a href="www.naver.com">네이버</a>
+    <script>
+      const apiKey = "1114bcc2faec7334042e3c7b932dc4a2";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather"; // Replace with your API endpoint
+
+      fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`) // Replace 'London' with your desired location
+        .then((response) => response.json())
+        .then((data) => {
+          // Process the response data
+
+          const temperature = data.main.temp;
+          const feels_like = data.main.feels_like;
+          const max_temp = data.main.temp_max;
+          const min_temp = data.main.temp_min;
+          const description = data.weather[0].description;
+          const id = data.weather[0].id;
+
+          let iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+          console.log(`Temperature: ${temperature}°C`);
+          console.log(`Feelslike: ${feels_like}`);
+          console.log(id);
+          console.log(data);
+
+          $("#weather-info").html(`
+          <img src="${iconURL}" alt="weatherIcon">
+          <p>${description}</p>
+          <p>온도: ${temperature}°C</p>
+          <p>체감온도: ${feels_like}°C</p>
+          <p>최고온도: ${max_temp}°C</p>
+          <p>최저온도: ${min_temp}°C</p>
+        `);
+
+          if (id >= 300 && id < 532) {
+            $("#box").html(`
+              <video muted autoplay loop>
+                <source src="./rain.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>
+              </video>
+            `);
+          } else if (id == 800) {
+            $("#box").html(`
+              <video muted autoplay loop>
+                <source src="./sunny.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>
+              </video>
+            `);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error:", error);
+        });
+    </script>
+  </body>
+</html>
