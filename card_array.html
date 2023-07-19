@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카드 배열</title>
+    <!-- Animation 라이브러리-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding: 0px;
+        margin: 0px;
+        background-color: white;
+      }
+      .jb-box {
+        width: 100%;
+        height: 00px;
+        overflow: visible;
+        margin: 0px auto;
+        position: relative;
+      }
+      video {
+        width: 100%;
+        position: fixed;
+      }
+      .container {
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        width: 100%;
+      }
+      .jb-text p {
+        margin-top: -24px;
+        text-align: center;
+        font-size: 48px;
+        color: #ffffff;
+      }
+    </style>
+    <style>
+      /* nav bar부분 배경 투명하게 */
+      .d-flex {
+        background-color: transparent;
+      }
+      /* box에 버튼 효과, hover 효과 추가 */
+      .box {
+        height: 100px;
+        background-color: lightgray;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .box:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+      /* box크기 조정 (임의) */
+      .box1 {
+        height: 500px;
+        margin-bottom: 15px;
+      }
+      .box2 {
+        height: 240px;
+        margin-bottom: 10px;
+      }
+      .box3 {
+        height: 300px;
+        margin-bottom: 15px;
+      }
+      .box4 {
+        height: 300px;
+        margin-bottom: 15px;
+      }
+      /* banner 사이즈 조정 */
+      .banner {
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+      }
+      #ul > li > p {
+        display: inline-block;
+      }
+      #lottery1 > p {
+        display: inline-block;
+      }
+      #lottery2 > p {
+        display: inline-block;
+      }
+
+      /* nav bar 폰트 */
+      @font-face {
+        font-family: "Yeongdo-Rg";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* banner 폰트 */
+      @font-face {
+        font-family: "TAEBAEKmilkyway";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      .noon {
+        font-family: "Yeongdo-Rg";
+        font-size: large;
+        background-color: transparent;
+        /* 텍스트 이외의 배경 투명하게 처리 */
+      }
+
+      .noon2 {
+        font-family: "TAEBAEKmilkyway";
+        background-color: transparent;
+      }
+    </style>
+    <style>
+      .animate__fadeOut {
+        --animate-duration: 0.3s;
+      }
+      .animate__bounce {
+        --animate-duration: 0.7s;
+      }
+      .animate__heartBeat {
+        --animate-duration: 0.7s;
+      }
+      .animate__flipInY {
+        --animate-duration: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="jb-box" id="box">
+      <video muted autoplay loop></video>
+
+      <!-- box 배열-->
+      <div class="container">
+        <!-- nav bar -->
+        <div class="d-flex justify-content-center py-3">
+          <h1 class="noon">오늘의 아침</h1>
+        </div>
+
+        <!-- nav bar과 카드 사이 배너 -->
+        <div class="banner">
+          <h1 class="noon2">
+            <span class="noon2" id="date-text"></span>일 소식을 전해드립니다
+          </h1>
+        </div>
+        <div class="row">
+          <!-- main box -->
+          <div class="col-sm-6 col-lg-6 mb-1">
+            <div class="box box1" onclick="buttonClicked()">
+              <div class="toDoList">
+                <br />
+                <h3 class="animate__animated animate__bounce">ToDoList</h3>
+                <input id="ToDoListValue" type="text" />
+                <button style="border-radius: 15%" onclick="addToDoList()">
+                  등록
+                </button>
+                <ul style="font-weight: 500" id="ul">
+                  <div style="height: 5px"></div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- main 오른쪽 옆칸 box -->
+          <div class="col-sm-6 col-lg-6 mb-1">
+            <div class="row">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2" onclick="buttonClicked()">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="colorSelect"
+                      onclick="colorButton()"
+                    >
+                      오늘의 추천색 보기
+                    </button>
+                    <br />
+                    <br />
+                    <h3
+                      style="font-weight: 900; background-color: #ffffff"
+                      id="selectedColor"
+                    >
+                      위 버튼을 클릭하세요
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2" onclick="buttonClicked()">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <h2>오늘의 명언</h2>
+                    <button style="border-radius: 15%" onclick="phrase()">
+                      새로고침
+                    </button>
+                    <br />
+                    <br />
+                    <h6 id="phrase"></h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2" onclick="buttonClicked()">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="foodButton"
+                      onclick="foodButton()"
+                    >
+                      음식 추천 버튼
+                    </button>
+                    <br />
+                    <br />
+                    <h3 id="food"></h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2" onclick="buttonClicked()">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      onclick="engWordButton()"
+                    >
+                      오늘의 영단어
+                    </button>
+                    <br />
+                    <br />
+                    <h4 style="font-weight: 600" id="engWord"></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-example-divider"></div>
+          <!--다음줄 box-->
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box3" onclick="buttonClicked()">
+              <div style="text-align: center">
+                <br />
+                <br />
+                <button
+                  style="border-radius: 15%"
+                  id="lotteryButton"
+                  onclick="lotteryButton()"
+                >
+                  로또 번호 추천
+                </button>
+                <br />
+                <br />
+                <h3 id="lottery1"></h3>
+                <h3 id="lottery2"></h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box3" onclick="buttonClicked()"></div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box3" onclick="buttonClicked()"></div>
+          </div>
+          <div class="b-example-divider"></div>
+          <!--다음줄 box-->
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4" onclick="buttonClicked()"></div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4" onclick="buttonClicked()"></div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4" onclick="buttonClicked()"></div>
+          </div>
+          <div class="b-example-divider"></div>
+          <div class="b-example-divider"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/engWord.js"></script>
+    <script src="./js/color.js"></script>
+    <script src="./js/food.js"></script>
+    <script src="./js/phrase.js"></script>
+    <script src="./js/TodoList.js"></script>
+    <script src="./js/lottery.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // 현재 날짜를 가져와서 텍스트에 적용하는 함수
+      function setCurrentDateText() {
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        const dateTextElement = document.getElementById("date-text");
+        dateTextElement.textContent = month + "/" + day;
+      }
+
+      // 페이지 로드 시 현재 날짜 텍스트 설정
+      window.addEventListener("load", setCurrentDateText);
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const apiKey = "1114bcc2faec7334042e3c7b932dc4a2";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather"; // Replace with your API endpoint
+
+      fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`) // Replace 'London' with your desired location
+        .then((response) => response.json())
+        .then((data) => {
+          // Process the response data
+
+          const temperature = data.main.temp;
+          const feels_like = data.main.feels_like;
+          const max_temp = data.main.temp_max;
+          const min_temp = data.main.temp_min;
+          const description = data.weather[0].description;
+          const id = data.weather[0].id;
+
+          let iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+          console.log(`Temperature: ${temperature}°C`);
+          console.log(`Feelslike: ${feels_like}`);
+          console.log(id);
+          console.log(data);
+
+          $("#weather-info").html(`
+        <img src="${iconURL}" alt="weatherIcon">
+        <p>${description}</p>
+        <p>온도: ${temperature}°C</p>
+        <p>체감온도: ${feels_like}°C</p>
+        <p>최고온도: ${max_temp}°C</p>
+        <p>최저온도: ${min_temp}°C</p>
+      `);
+
+          if (id >= 300 && id < 532) {
+            $("video").html(`
+              <source src="./rain.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>
+            
+          `);
+          } else if (id == 800) {
+            $("video").html(`
+              <source src="./sunny.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>
+          `);
+          } else if (id < 250) {
+            $("video").html(`
+              <source src="./thunder.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id >= 700 && id < 800) {
+            $("video").html(`
+              <source src="./mist.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id > 800) {
+            $("video").html(`
+              <source src="./cloudy.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error:", error);
+        });
+    </script>
+
+    <script>
+      function buttonClicked() {
+        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      }
+    </script>
+  </body>
+</html>
