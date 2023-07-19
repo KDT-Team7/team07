@@ -23,20 +23,22 @@
       }
       .jb-box {
         width: 100%;
-        height: 00px;
         overflow: visible;
         margin: 0px auto;
-        position: relative;
+        position: absolute;
+        top: 0px;
       }
       video {
         width: 100%;
         position: fixed;
+        z-index: 1;
       }
       .container {
         position: absolute;
-        top: 10%;
+        top: 150px;
         left: 5%;
         width: 100%;
+        z-index: 1;
       }
       .jb-text p {
         margin-top: -24px;
@@ -47,6 +49,12 @@
     </style>
 
     <style>
+      /* nav bar부분 배경 투명하게 */
+      .d-flex {
+        position: relative;
+        background-color: transparent;
+        z-index: 2;
+      }
       /* box에 버튼 효과, hover 효과 추가 */
       .box {
         height: 100px;
@@ -67,6 +75,11 @@
     </style>
     <style>
       /* box크기 조정 (임의) */
+
+      .box0 {
+        height: 250px;
+        margin-bottom: 10px;
+      }
       .box1 {
         height: 500px;
         margin-bottom: 15px;
@@ -83,27 +96,67 @@
         height: 300px;
         margin-bottom: 15px;
       }
+      /* banner 사이즈 조정 */
+      .banner {
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* nav bar 폰트 */
+      @font-face {
+        font-family: "Yeongdo-Rg";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* banner 폰트 */
+      @font-face {
+        font-family: "TAEBAEKmilkyway";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      .noon {
+        font-family: "Yeongdo-Rg";
+        font-size: large;
+        background-color: transparent;
+        /* 텍스트 이외의 배경 투명하게 처리 */
+      }
+
+      .noon2 {
+        font-family: "TAEBAEKmilkyway";
+        background-color: transparent;
+      }
     </style>
   </head>
   <body>
     <!-- nav bar -->
     <div class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">Home</a>
-        </li>
-        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-      </ul>
+      <h1 class="noon">오늘의 아침</h1>
     </div>
+
+    <!-- nav bar과 카드 사이 배너 -->
+    <div class="banner">
+      <h1 class="noon2">
+        <span class="noon2" id="date-text"></span>일 소식을 전해드립니다
+      </h1>
+    </div>
+
     <!-- 배경 동영상 -->
     <div class="jb-box" id="box">
       <video muted autoplay loop></video>
       <!-- box 배열-->
       <div class="container">
         <div class="row">
+          <div class="col-sm-6 col-lg-12 mb-1">
+            <div class="box box0" onclick="buttonClicked()"></div>
+          </div>
           <!-- main box -->
           <div class="col-sm-6 col-lg-6 mb-1">
             <div class="box box1" onclick="buttonClicked()"></div>
@@ -162,10 +215,10 @@
       }
     </script>
 
-    <!-- <h1>Current Weather</h1>
+    <h1>Current Weather</h1>
     <div id="weather-info">
       <p>Loading...</p>
-    </div> -->
+    </div>
     <script>
       const apiKey = "1114bcc2faec7334042e3c7b932dc4a2";
       const apiUrl = "https://api.openweathermap.org/data/2.5/weather"; // Replace with your API endpoint
@@ -208,14 +261,39 @@
             $("video").html(`
               <source src="./sunny.mp4" type="video/mp4" />
               <strong>Your browser does not support the video tag.</strong>
-            
           `);
+          } else if (id < 250) {
+            $("video").html(`
+              <source src="./thunder.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id >= 700 && id < 800) {
+            $("video").html(`
+              <source src="./mist.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id > 800) {
+            $("video").html(`
+              <source src="./cloudy.mp4" type="video/mp4" />
+              <strong>Your browser does not support the video tag.</strong>`);
           }
         })
         .catch((error) => {
           // Handle any errors
           console.error("Error:", error);
         });
+    </script>
+
+    <script>
+      // 현재 날짜를 가져와서 텍스트에 적용하는 함수
+      function setCurrentDateText() {
+        const currentDate = new Date();
+        const month = currentDate.getMonth() + 1;
+        const day = currentDate.getDate();
+        const dateTextElement = document.getElementById("date-text");
+        dateTextElement.textContent = month + "/" + day;
+      }
+
+      // 페이지 로드 시 현재 날짜 텍스트 설정
+      window.addEventListener("load", setCurrentDateText);
     </script>
   </body>
 </html>
