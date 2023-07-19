@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D-day 계산기</title>
+    <script>
+      function calculateRemainingDays() {
+        // 사용자가 입력한 D-day 날짜 가져오기
+        var ddayInput = document.getElementById("dday-input").value;
+
+        // 현재 날짜 가져오기
+        var currentDate = new Date();
+
+        // D-day 날짜 가져오기
+        var ddayDate = new Date(ddayInput);
+
+        // 시간 차이 계산
+        var timeDiff = ddayDate.getTime() - currentDate.getTime();
+
+        // 남은 날짜 계산
+        var remainingDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        // 결과 표시
+        var resultElement = document.getElementById("result");
+        if (remainingDays > 0) {
+          resultElement.innerHTML = "D-" + remainingDays;
+        } else if (remainingDays === 0) {
+          resultElement.innerHTML = "D-day";
+        } else {
+          resultElement.innerHTML = "D+" + Math.abs(remainingDays);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>D-day 계산기</h1>
+    <label for="dday-input">D-day 날짜:</label>
+    <input type="date" id="dday-input" />
+    <button onclick="calculateRemainingDays()">계산하기</button>
+    <p id="result"></p>
+  </body>
+</html>
