@@ -162,4 +162,8 @@ function phrase() {
   let phrase = $("#phrase");
   const randomNum = Math.floor(Math.random() * 157 + 1);
   phrase[0].innerText = empoweringQuotes[randomNum - 1];
+  $(phrase).addClass("animate__animated animate__zoomInDown");
+  setTimeout(() => {
+    phrase.removeClass("antimate__animated animate__zoomInDown");
+  }, 1000);
 }

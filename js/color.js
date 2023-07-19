@@ -146,4 +146,8 @@ function colorButton() {
   const randomNum = Math.floor(Math.random() * 140 + 1);
   selectedColor[0].innerText = colors[randomNum - 1];
   $(selectedColor).css("color", `${colors[randomNum - 1]}`);
+  $(selectedColor).addClass("animate__animated animate__flipInY");
+  setTimeout(() => {
+    selectedColor.removeClass("antimate__animated animate__flipInY");
+  }, 500);
 }
