@@ -21,6 +21,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
     <!-- todoList.css 스타일 적용 -->
     <link rel="stylesheet" href="./css/todoList.css" />
     <!-- 오늘의 추천색 -->
@@ -78,8 +79,7 @@
       /* box에 버튼 효과, hover 효과 추가 */
       .box {
         height: 100px;
-        background-color: rgb(243, 238, 238);
-        opacity: 100%;
+        background-color: rgb(243, 238, 238, 0.85);
 
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -183,6 +183,7 @@
       .banner_main {
         font-family: "TAEBAEKmilkyway";
         background-color: transparent;
+        font-weight: 500;
       }
       .day_msg {
         font-family: "Yeongdo-Rg";
@@ -330,12 +331,33 @@
           <!-- main box -->
           <div class="col-sm-6 col-lg-6 mb-1">
             <div class="box box1">
-              <div class="toDoList">
+              <div>
                 <br />
-                <h3 class="animate__animated animate__bounce">ToDoList</h3>
-                <input id="ToDoListValue" type="text" />
-                <button style="border-radius: 15%" onclick="addToDoList()">
-                  등록
+                <h3 class="animate__animated animate__bounce" id="todoHeader">
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/emoji/48/man-technologyst.png"
+                    alt="man-technologyst"
+                  />
+                  오늘의 할 일
+                </h3>
+                <input
+                  id="ToDoListValue"
+                  type="text"
+                  placeholder="오늘의 리스트를 써주세요!"
+                />
+                <button
+                  style="border-radius: 15%"
+                  id="toDoBtn"
+                  onclick="addToDoList()"
+                >
+                  <img
+                    width="30"
+                    height="30"
+                    src="https://img.icons8.com/emoji/48/plus-emoji.png"
+                    alt="plus-emoji"
+                  />
                 </button>
                 <ul style="font-weight: 500" id="ul">
                   <div style="height: 5px"></div>
@@ -385,8 +407,8 @@
                       <img
                         width="30"
                         height="30"
-                        src="https://img.icons8.com/ios/50/saddle-stitched-booklet.png"
-                        alt="saddle-stitched-booklet"
+                        src="https://img.icons8.com/emoji/48/books-emoji.png"
+                        alt="books-emoji"
                       />
                       오늘의 명언
                       <br />
@@ -437,15 +459,14 @@
                     >
                       <!-- 오늘의 영단어 -->
                       <img
-                        width="32"
-                        height="32"
-                        src="https://img.icons8.com/ios/50/brick.png"
-                        alt="brick"
+                        width="30"
+                        height="30"
+                        src="https://img.icons8.com/emoji/48/writing-hand.png"
+                        alt="writing-hand"
                       />
                       오늘의 영단어 <br />
-                      click here
                     </button>
-
+                    <div id="engWordDiv">click here</div>
                     <br />
                   </div>
                 </div>
@@ -471,7 +492,7 @@
                     src="https://img.icons8.com/emoji/48/money-mouth-face.png"
                     alt="money-mouth-face"
                   />
-                  1등 ㄱㄱ
+                  행운의 로또 번호
                 </button>
                 <br />
                 <div id="lotteryClick">click here</div>
