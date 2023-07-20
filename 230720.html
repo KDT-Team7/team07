@@ -78,9 +78,8 @@
       /* box에 버튼 효과, hover 효과 추가 */
       .box {
         height: 100px;
-        background-color: rgb(243, 238, 238);
+        background-color: rgb(243, 238, 238, 0.6);
         opacity: 100%;
-
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -88,6 +87,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        border-radius: 10%;
       }
 
       .box:hover {
@@ -120,6 +120,8 @@
       }
       .align-items0 {
         align-items: baseline;
+        opacity: 100%;
+        z-index: 2;
       }
       /* banner 사이즈 조정 */
       .banner {
@@ -340,7 +342,7 @@
                 <button style="border-radius: 15%" onclick="addToDoList()">
                   등록
                 </button>
-                <ul style="font-weight: 500" id="ul">
+                <ul style="font-weight: 600" id="ul">
                   <div style="height: 5px"></div>
                 </ul>
               </div>
