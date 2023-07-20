@@ -1,0 +1,17 @@
+#lottery1 {
+  font-weight: 900;
+  border: none;
+}
+#lottery2 {
+  font-weight: 900;
+  border: none;
+}
+#lotteryButton {
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: transparent;
+}
+#lotteryClick {
+  font-weight: 100;
+}

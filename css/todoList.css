@@ -1,0 +1,12 @@
+/* .toDoList {
+  font-weight: bold;
+} */
+
+#todoHeader {
+  font-weight: 900;
+}
+
+#toDoBtn {
+  border: none;
+  background: transparent;
+}

@@ -14,10 +14,10 @@ function lotteryButton() {
   let lottery2 = $("#lottery2");
   lottery1[0].innerHTML = `<p>${removed[0]}</p>  <p>${removed[1]}</p>  <p>${removed[2]}</p>`;
   lottery2[0].innerHTML = `<p>${removed[3]}</p>  <p>${removed[4]}</p>  <p>${removed[5]}</p>`;
-  $(lottery1).children().css("border", "solid");
-  $(lottery2).children().css("border", "solid");
-  $(lottery1).children().css("border-radius", "20%");
-  $(lottery2).children().css("border-radius", "20%");
+  // $(lottery1).children().css("border", "solid");
+  // $(lottery2).children().css("border", "solid");
+  // $(lottery1).children().css("border-radius", "50%");
+  // $(lottery2).children().css("border-radius", "50%");
 
   $(lottery1).addClass("antimate__animated animate__heartBeat");
   $(lottery2).addClass("antimate__animated animate__heartBeat");
