@@ -1,6 +1,13 @@
 let liCount = 1;
 function addToDoList() {
   let addToDoListValue = $("#ToDoListValue").val();
+
+  // 입력창에 아무 텍스트도 띄우지 않는 경우, alert 창 띄움
+  if (addToDoListValue.trim() === "") {
+    alert("오늘의 할 일을 입력해주세요!");
+    return;
+  }
+
   let list1 = document.createElement("li");
   list1.innerHTML = `<p>${addToDoListValue}</p>   <button class="float-right" style="border-radius: 15%;" id="doneButton${liCount}" onclick="doneList(${liCount})">완료</button>   <button class="float-right" style="border-radius: 15%;" id="removeButton${liCount}" onclick="removeList(${liCount})">삭제</button>`;
   $("#TodoUl").append(list1);
