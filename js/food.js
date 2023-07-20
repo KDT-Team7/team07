@@ -59,4 +59,8 @@ function foodButton() {
   let food = $("#food");
   const randomNum = Math.floor(Math.random() * 54 + 1);
   food[0].innerText = koreanFoods[randomNum - 1];
+  $(food).addClass("animate__animated animate__flipInY");
+  setTimeout(() => {
+    food.removeClass("antimate__animated animate__flipInY");
+  }, 500);
 }
