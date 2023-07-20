@@ -9,11 +9,17 @@ function addToDoList() {
   }
 
   let list1 = document.createElement("li");
-  list1.innerHTML = `<p>${addToDoListValue}</p>   <button class="float-right" style="border-radius: 15%;" id="doneButton${liCount}" onclick="doneList(${liCount})">완료</button>   <button class="float-right" style="border-radius: 15%;" id="removeButton${liCount}" onclick="removeList(${liCount})">삭제</button>`;
+  list1.innerHTML = `<p>${addToDoListValue}</p>   
+  <button class="float-right" style="border-radius: 15%;" id="doneButton${liCount}" onclick="doneList(${liCount})">완료</button>  
+  <button class="float-right" style="border-radius: 15%;" id="removeButton${liCount}" onclick="removeList(${liCount})">삭제</button>`;
   $("#ul").append(list1);
   $(list1).addClass("animate__animated animate__bounceIn");
   $(`#doneButton${liCount}`).addClass("btn btn-outline-primary btn-sm");
   $(`#removeButton${liCount}`).addClass("btn btn-outline-danger btn-sm");
+
+  //텍스트박스 리셋
+  $("#ToDoListValue").val("");
+
   liCount++;
 }
 function removeList(count) {
