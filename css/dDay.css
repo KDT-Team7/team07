@@ -1,0 +1,20 @@
+#dDayHead {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#remainingDays {
+  border-radius: 20%;
+  border-width: 1px;
+}
+
+#ResetDday {
+  border-radius: 20%;
+  border-width: 1px;
+}
+
+#result {
+  text-align: center;
+  font-weight: 900;
+  font-size: 50px;
+}
