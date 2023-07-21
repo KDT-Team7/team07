@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카드 배열</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <!-- Animation 라이브러리-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- jquery불러오기 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/b08ebf6beb.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- todoList.css 스타일 적용 -->
+    <link rel="stylesheet" href="./css/todoList.css" />
+    <!-- 오늘의 추천색 -->
+    <link rel="stylesheet" href="./css/color.css" />
+    <!-- 오늘의 명언 -->
+    <link rel="stylesheet" href="./css/phrase.css" />
+    <!-- 오늘의 점심 -->
+    <link rel="stylesheet" href="./css/food.css" />
+    <!-- 오늘의 영단어 -->
+    <link rel="stylesheet" href="./css/engWord.css" />
+    <!-- 로또번호 -->
+    <link rel="stylesheet" href="./css/lottery.css" />
+    <!-- 배경 영상 크기조절 -->
+    <style>
+      body {
+        padding: 0px;
+        margin: 0px;
+        background-color: white;
+      }
+      .jb-box {
+        width: 100%;
+        overflow: visible;
+        margin: 0px auto;
+        position: absolute;
+        top: 0px;
+      }
+      video {
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+      }
+      .container {
+        position: absolute;
+        top: 150px;
+        left: 5%;
+        width: 100%;
+        z-index: 1;
+        font-family: "TAEBAEKmilkyway";
+      }
+      .jb-text p {
+        margin-top: -24px;
+        text-align: center;
+        font-size: 48px;
+        color: #ffffff;
+      }
+    </style>
+
+    <style>
+      /* nav bar부분 배경 투명하게 */
+      .d-flex {
+        position: relative;
+        background-color: transparent;
+        z-index: 2;
+      }
+      /* box에 버튼 효과, hover 효과 추가 */
+      .box {
+        height: 100px;
+        background-color: rgb(243, 238, 238, 0.85);
+
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 10%;
+      }
+
+      .box:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+    </style>
+    <style>
+      /* box크기 조정 (임의) */
+
+      .box0 {
+        height: 250px;
+        margin-bottom: 10px;
+      }
+      .box1 {
+        height: 500px;
+        margin-bottom: 15px;
+      }
+      .box2 {
+        height: 240px;
+        margin-bottom: 10px;
+      }
+      .box3 {
+        height: 300px;
+        margin-bottom: 15px;
+      }
+      .box4 {
+        height: 300px;
+        margin-bottom: 15px;
+      }
+      .align-items0 {
+        align-items: baseline;
+        opacity: 100%;
+        z-index: 2;
+      }
+      /* banner 사이즈 조정 */
+      .banner {
+        height: 30vh;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* 하단바 문구 사이즈 조정 */
+      .day_msg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 15vh;
+      }
+
+      /* 상단 이동 버튼 */
+      .goupbtn {
+        /* display: block; */
+        background-color: transparent;
+        border: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+      /* 로또 번호 */
+      #ul > li > p {
+        display: inline-block;
+      }
+      #lottery1 > p {
+        display: inline-block;
+      }
+      #lottery2 > p {
+        display: inline-block;
+      }
+
+      /* nav bar 폰트 */
+      @font-face {
+        font-family: "Yeongdo-Rg";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/Yeongdo-Rg.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* banner 폰트 */
+      @font-face {
+        font-family: "TAEBAEKmilkyway";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      .nav_bar {
+        font-family: "Yeongdo-Rg";
+        font-size: large;
+        background-color: transparent;
+        /* 텍스트 이외의 배경 투명하게 처리 */
+      }
+
+      .banner_main {
+        font-family: "TAEBAEKmilkyway";
+        background-color: transparent;
+        font-weight: 500;
+      }
+      .day_msg {
+        font-family: "Yeongdo-Rg";
+        font-size: 50px;
+      }
+    </style>
+
+    <!-- 배경색에 따른 텍스트 컬러 변화 js -->
+    <script src="./js/textColor.js"></script>
+    <!-- 날씨 box CSS-->
+    <style>
+        #current {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 50%;
+          height: 250px;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+
+        #current .iconDes {
+          text-align: center;
+          margin-left: 10%;
+          font-weight: 1000;
+        }
+
+        #current .tempFeels {
+          text-align: left;
+          margin-right: 5%;
+        }
+
+        .tempFeels h1 {
+          font-size: 50px;
+          font-weight: 1000;
+        }
+        .tempFeels p {
+          font-weight: 500;
+        }
+        #current .misc {
+          text-align: left;
+          font-weight: 1000;
+
+        }
+
+        #forecast {
+          position: absolute;
+          top: 10px;
+          left: 50%;
+          width: 50%;
+          height: 250px;
+          font-weight: 1000;
+
+        }
+
+        #forecast .row {
+          width: 10vw;
+          min-width: 50px;
+          height: 125px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          text-align: center;
+          font-size: 10px;
+        }
+        #forecast p {
+          margin: 0;
+          background-color: rgba(255, 255, 255, 0.522)"
+        }
+
+        #forecast img {
+          width: 80px;
+          height: 80px;
+        }
+
+      /* 날씨 반응형 */
+
+      @media screen and (max-width: 1200px) {
+        #current .misc {
+          margin-left: 25px;
+        }
+
+      }
+
+        @media screen and (max-width: 992px) {
+          #forecast  {
+            visibility: hidden;
+          }
+
+          #current .misc {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: -20px;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          #current .tempFeels {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: 15%
+          }
+
+        }
+    </style>
+    <!-- 애니메이션 CSS -->
+    <style>
+      .animate__fadeOut {
+        --animate-duration: 0.3s;
+      }
+      .animate__bounce {
+        --animate-duration: 0.7s;
+      }
+      .animate__heartBeat {
+        --animate-duration: 0.7s;
+      }
+      .animate__flipInY {
+        --animate-duration: 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- nav bar -->
+    <div class="d-flex justify-content-center py-3">
+      <h1 class="nav_bar">
+        <img
+          width="48"
+          height="48"
+          src="https://img.icons8.com/color/48/sun--v1.png"
+          alt="sun--v1"
+        />오늘의 아침
+      </h1>
+    </div>
+
+    <!-- nav bar과 카드 사이 배너 -->
+    <div class="banner">
+      <h1 class="banner_main">
+        <span class="noon2" id="date-text"></span>일 소식을 전해드립니다
+      </h1>
+    </div>
+
+    <!-- 배경 동영상 -->
+    <div class="jb-box" id="box">
+      <video muted autoplay loop></video>
+      <!-- box 배열-->
+      <div class="container">
+        <div class="row">
+          <!-- 날씨 box -->
+          <div class="col-sm-12 col-lg-12 mb-1">
+            <div class="box box0">
+              <div id="current">
+                <div class="current iconDes"></div>
+                <div class="current tempFeels"></div>
+                <div class="current misc" -></div>
+              </div>
+              <div id="forecast">
+                <table>
+                  <tr class="row row1"></tr>
+                  <tr class="row row2"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- main box -->
+          <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+            <div class="align-items0 box box1">
+              <div class="toDoList">
+                <br />
+                <h3 class="animate__animated animate__bounce" id="todoHeader">
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/emoji/48/man-technologyst.png"
+                    alt="man-technologyst"
+                  />
+                  오늘의 할 일
+                </h3>
+                <input
+                  id="ToDoListValue"
+                  type="text"
+                  placeholder="오늘의 리스트를 써주세요!"
+                />
+                <button
+                  style="border-radius: 15%"
+                  id="toDoBtn"
+                  onclick="addToDoList()"
+                >
+                  <img
+                    width="30"
+                    height="30"
+                    src="https://img.icons8.com/emoji/48/plus-emoji.png"
+                    alt="plus-emoji"
+                  />
+                </button>
+                <ul style="font-weight: 600" id="ul">
+                  <div style="height: 5px"></div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- main 오른쪽 옆칸 box -->
+          <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+            <div class="row">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="colorSelect"
+                      onclick="colorButton()"
+                    >
+                      <img
+                        width="48"
+                        height="48"
+                        src="https://img.icons8.com/emoji/48/necktie.png"
+                        alt="necktie"
+                      /><br />
+                      click here
+                      <!-- 오늘 무슨 색 입지? -->
+                    </button>
+                    <br />
+                    <br />
+                    <h3
+                      style="font-weight: 900; background-color: transparent"
+                      id="selectedColor"
+                    >
+                      오늘 무슨 색 입지?
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2" id="dayPhraseBox">
+                  <div style="text-align: center">
+                    <!-- 오늘의 명언 -->
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="dayPhrase"
+                      onclick="phrase()"
+                    >
+                      <img
+                        width="30"
+                        height="30"
+                        src="https://img.icons8.com/emoji/48/books-emoji.png"
+                        alt="books-emoji"
+                      />
+                      오늘의 명언
+                      <br />
+                      click here
+                    </button>
+                    <br />
+                    <br />
+                    <h6 id="phrase"></h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="foodButton"
+                      onclick="foodButton()"
+                    >
+                      <img
+                        width="48"
+                        height="48"
+                        src="https://img.icons8.com/emoji/48/chopsticks-emoji.png"
+                        alt="chopsticks-emoji"
+                      />
+                      <br />
+                      click here
+                    </button>
+                    <br />
+                    <br />
+                    <!-- <h3
+                      style="font-weight: 900; background-color: transparent"
+                      id="selectedColor"
+                    >
+                      오늘 뭐 먹지?
+                    </h3> -->
+                    <h3 style="font-weight: 900" id="food">오늘 뭐 먹지?</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
+                  <div style="text-align: center">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="engWordBtn"
+                      onclick="engWordButton()"
+                    >
+                      <!-- 오늘의 영단어 -->
+                      <img
+                        width="30"
+                        height="30"
+                        src="https://img.icons8.com/emoji/48/writing-hand.png"
+                        alt="writing-hand"
+                      />
+                      오늘의 영단어 <br />
+                      click here
+                    </button>
+                    <br />
+                    <br />
+                    <h4 style="font-weight: 600" id="engWord"></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-example-divider"></div>
+          <!--다음줄 box-->
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="align-items0 box box3">
+              <div style="text-align: center">
+                <br />
+                <br />
+                <button
+                  style="border-radius: 15%"
+                  id="lotteryButton"
+                  onclick="lotteryButton()"
+                >
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/emoji/48/money-mouth-face.png"
+                    alt="money-mouth-face"
+                  />
+                  행운의 로또 번호
+                </button>
+                <br />
+                <div id="lotteryClick"></div>
+                <br />
+                <h3 id="lottery1"></h3>
+                <h3 id="lottery2"></h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box3 boxB" onclick="buttonClicked()">
+              <div
+                class="progress"
+                role="progressbar"
+                aria-label="Basic example"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 500px"
+              >
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+              <div id="timer"></div>
+
+              <button id="stopTimer">타이머 멈추기</button>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box3 boxC" onclick="buttonClicked()">
+              <div class="progress-stacked" style="width: 300px">
+                <div
+                  class="progress pb1"
+                  role="progressbar"
+                  aria-label="Segment one"
+                  aria-valuenow="15"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 50%; min-width: 50%"
+                >
+                  <div class="progress-bar"></div>
+                </div>
+                <div
+                  class="progress pb2"
+                  role="progressbar"
+                  aria-label="Segment two"
+                  aria-valuenow="30"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 50%"
+                >
+                  <div class="progress-bar bg-success"></div>
+                </div>
+                <div
+                  class="progress pb3"
+                  role="progressbar"
+                  aria-label="Segment three"
+                  aria-valuenow="20"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 0%"
+                >
+                  <div class="progress-bar bg-info"></div>
+                </div>
+              </div>
+
+              <!-- <div id="prtimer"></div> -->
+
+              <button id="prstopTimer">타이머 멈추기</button>
+            </div>
+          </div>
+          <div class="b-example-divider"></div>
+          <!--다음줄 box-->
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4"></div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4"></div>
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4"></div>
+          </div>
+          <div class="b-example-divider"></div>
+          <div class="b-example-divider"></div>
+          <!-- 페이지 하단 -->
+          <div class="day_msg"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/engWord.js"></script>
+    <script src="./js/color.js"></script>
+    <script src="./js/food.js"></script>
+    <script src="./js/phrase.js"></script>
+    <script src="./js/TodoList.js"></script>
+    <script src="./js/lottery.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 가장 하단에서 가장 상단으로 가는 버튼 -->
+    <button id="scrollToTopBtn" class="goupbtn" onclick="scrollToTop()">
+      <img
+        width="50"
+        height="50"
+        src="https://img.icons8.com/ios-filled/50/circled-up.png"
+        alt="circled-up"
+      />
+    </button>
+
+    <!-- 상단 이동 버튼 js파일 -->
+    <script src="./js/scrollToTop.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 현재 날씨를 불러오고 배경 바꾸기 -->
+    <script>
+      const apiKey = "1114bcc2faec7334042e3c7b932dc4a2";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather"; // Replace with your API endpoint
+
+      fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`) // Replace 'London' with your desired location
+        .then((response) => response.json())
+        .then((data) => {
+          // Process the response data
+
+          const temperature = data.main.temp.toFixed(1);
+          const feels_like = data.main.feels_like.toFixed(1);
+          const max_temp = data.main.temp_max.toFixed(1);
+          const min_temp = data.main.temp_min.toFixed(1);
+          const humidity = data.main.humidity.toFixed(1);
+          const wind_speed = data.wind.speed.toFixed(1);
+          const description = data.weather[0].description;
+          const id = data.weather[0].id;
+
+          let iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+          console.log(`Temperature: ${temperature}°C`);
+          console.log(`Feelslike: ${feels_like}`);
+          console.log(id);
+          console.log(data);
+
+          $(".iconDes").html(`
+        <img src="${iconURL}" alt="weatherIcon" style ="width:200px; height:200px">
+        <p>${description}</p>
+        `);
+
+          $(".tempFeels").html(`
+          <h1>${temperature}°C</h1>
+          <p>체감온도: ${feels_like}°C</p>
+          `);
+
+          $(".misc").html(`
+          <p>습도: ${humidity}%</p>
+          <p>최고온도: ${max_temp}°C</p>
+          <p>최저온도: ${min_temp}°C</p>
+          <p>풍속: ${wind_speed}m/s</p>
+          
+          
+        `);
+
+          if (id >= 300 && id < 532) {
+            $("video").html(`
+                <source src="./rain.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>
+
+            `);
+          } else if (id == 800) {
+            $("video").html(`
+                <source src="./sunny.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>
+            `);
+          } else if (id < 250) {
+            $("video").html(`
+                <source src="./thunder.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id >= 700 && id < 800) {
+            $("video").html(`
+                <source src="./mist.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>`);
+          } else if (id > 800) {
+            $("video").html(`
+                <source src="./cloudy.mp4" type="video/mp4" />
+                <strong>Your browser does not support the video tag.</strong>`);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error("Error:", error);
+        });
+
+      $.getJSON(
+        `https://api.openweathermap.org/data/2.5/forecast?q=seoul&appid=${apiKey}&lang=kr`,
+        function (forecastData) {
+          for (let i = 0; i < 8; i++) {
+            let newTd = document.createElement("td");
+            $(newTd).html(`
+            <p>${(i + 1) * 3}시</p>
+            <img src="https://openweathermap.org/img/wn/${
+              forecastData.list[i].weather[0].icon
+            }@2x.png" alt="weatherIcon" >
+              <p>${forecastData.list[i].weather[0].description}</p>
+              `);
+            if (i < 4) {
+              $(".row1").append(newTd);
+            } else {
+              $(".row2").append(newTd);
+            }
+          }
+          console.log(forecastData);
+        }
+      );
+    </script>
+
+    <!-- 상단에 현재 날짜 출력 js 파일 -->
+    <script src="./js/currentDate.js"></script>
+
+    <script>
+      //페이지 가장 하단에 문구 출력
+      // 랜덤한 문구 목록
+      const messages = [
+        "좋은 아침입니다!",
+        "Guten Morgen!",
+        "¡Buenos días!",
+        "おはようございます！",
+        "Bonjour !",
+      ];
+
+      // 랜덤한 문구 선택 및 출력
+      function displayRandomMessage() {
+        const messageContainer = document.querySelector(".day_msg");
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage = messages[randomIndex];
+        messageContainer.textContent = randomMessage;
+      }
+
+      // 페이지 로드 시 랜덤한 문구 출력
+      window.addEventListener("load", displayRandomMessage);
+    </script>
+    <script>
+      function buttonClicked() {
+        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      }
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let time = 120;
+      let maxTime = time;
+      let min = 0;
+      let sec = 0;
+      let percent = 0;
+
+      $(document).ready(function () {
+        timerID = setInterval(function () {
+          time -= 1;
+          percent = ((100 / maxTime) * time).toFixed(0);
+          min = Math.floor(time / 60);
+          sec = ((time / 60 - min) * 60).toFixed(0);
+          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
+          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(timerID);
+        });
+      });
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let prtime = 10;
+      let prmaxTime = prtime;
+      let prmin = 0;
+      let prsec = 0;
+      let prpercent = 0;
+
+      $(document).ready(function () {
+        prtimerID = setInterval(function () {
+          prtime -= 1;
+          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
+          prmin = Math.floor(prtime / 60);
+          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
+          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
+          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
+          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(prtimerID);
+        });
+      });
+    </script>
+
+    <script>
+      //페이지 가장 하단에 문구 출력
+      // 랜덤한 문구 목록
+      const messages = [
+        "좋은 아침입니다!",
+        "Guten Morgen!",
+        "¡Buenos días!",
+        "おはようございます！",
+        "Bonjour !",
+      ];
+
+      // 랜덤한 문구 선택 및 출력
+      function displayRandomMessage() {
+        const messageContainer = document.querySelector(".day_msg");
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage = messages[randomIndex];
+        messageContainer.textContent = randomMessage;
+      }
+
+      // 페이지 로드 시 랜덤한 문구 출력
+      window.addEventListener("load", displayRandomMessage);
+    </script>
+    <script>
+      function buttonClicked() {
+        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      }
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let time = 120;
+      let maxTime = time;
+      let min = 0;
+      let sec = 0;
+      let percent = 0;
+
+      $(document).ready(function () {
+        timerID = setInterval(function () {
+          time -= 1;
+          percent = ((100 / maxTime) * time).toFixed(0);
+          min = Math.floor(time / 60);
+          sec = ((time / 60 - min) * 60).toFixed(0);
+          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
+          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(timerID);
+        });
+      });
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let prtime = 10;
+      let prmaxTime = prtime;
+      let prmin = 0;
+      let prsec = 0;
+      let prpercent = 0;
+
+      $(document).ready(function () {
+        prtimerID = setInterval(function () {
+          prtime -= 1;
+          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
+          prmin = Math.floor(prtime / 60);
+          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
+          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
+          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
+          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(prtimerID);
+        });
+      });
+    </script>
+
+    <!-- 하단 문구 출력 js 파일 -->
+    <script src="./js/dayMsg.js"></script>
+  </body>
+</html>
