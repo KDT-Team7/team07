@@ -141,11 +141,36 @@ const colors = [
   "Yellowgreen",
 ];
 
+// 입력된 텍스트로부터 색상 코드를 추출하는 함수를 정의합니다.
+function extractColorCode(colorText) {
+  const tempDiv = document.createElement("div");
+  tempDiv.style.color = colorText;
+  document.body.appendChild(tempDiv);
+  const computedColor = window.getComputedStyle(tempDiv).color;
+  document.body.removeChild(tempDiv);
+
+  const regex = /\d+/g;
+  const numbers = computedColor.match(regex);
+
+  const yiq = (numbers[0] * 299 + numbers[1] * 587 + numbers[2] * 114) / 1000;
+
+  return yiq >= 128 ? "black" : "white";
+}
+
 function colorButton() {
   let selectedColor = $("#selectedColor");
   const randomNum = Math.floor(Math.random() * 140 + 1);
   selectedColor[0].innerText = colors[randomNum - 1];
   $(selectedColor).css("color", `${colors[randomNum - 1]}`);
+
+  const brightness = extractColorCode(`${colors[randomNum - 1]}`);
+  if (brightness == "white") {
+    // 밝은 배경
+    $(selectedColor).css("background-color", "white"); // 검은색 텍스트 (RGB: 0, 0, 0)
+  } else {
+    // 어두운 배경
+    $(selectedColor).css("background-color", "black"); // 흰색 텍스트 (RGB: 255, 255, 255)
+  }
   $(selectedColor).addClass("animate__animated animate__flipInY");
   setTimeout(() => {
     selectedColor.removeClass("antimate__animated animate__flipInY");
