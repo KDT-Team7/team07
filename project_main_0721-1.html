@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="./css/engWord.css" />
     <!-- 로또번호 -->
     <link rel="stylesheet" href="./css/lottery.css" />
+    <!-- 디데이 계산기 -->
+    <link rel="stylesheet" href="./css/dDay.css" />
     <!-- 배경 영상 크기조절 -->
     <style>
       body {
@@ -90,7 +92,7 @@
         background-color: rgb(243, 238, 238, 0.85);
 
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         display: flex;
         align-items: center;
@@ -553,7 +555,7 @@
                   행운의 로또 번호
                 </button>
                 <br />
-                <div id="lotteryClick"></div>
+                <div id="lotteryClick">click here</div>
                 <br />
                 <h3 id="lottery1"></h3>
                 <h3 id="lottery2"></h3>
@@ -574,7 +576,6 @@
                 <div class="progress-bar" style="width: 25%"></div>
               </div>
               <div id="timer"></div>
-
               <button id="stopTimer">타이머 멈추기</button>
             </div>
           </div>
@@ -624,7 +625,13 @@
           <div class="b-example-divider"></div>
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
+            <!-- d-day 계산기 -->
+            <div class="box box4" style="text-align: center">
+              <h3>D-day 계산기</h3>
+              <label for="dday-input">D-day 날짜:</label>
+              <input type="date" id="dday-input" />
+              <button onclick="calculateRemainingDays()">계산하기</button>
+              <p id="result"></p>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
             <div class="box box4"></div>
@@ -646,6 +653,7 @@
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
+    <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
