@@ -30,6 +30,8 @@
       rel="stylesheet"
     />
 
+    <!--calendar.css-->
+    <link rel="stylesheet" href="./css/calendar.css" />
     <!-- todoList.css 스타일 적용 -->
     <link rel="stylesheet" href="./css/todoList.css" />
     <!-- 오늘의 추천색 -->
@@ -92,7 +94,7 @@
         background-color: rgb(243, 238, 238, 0.85);
 
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         display: flex;
         align-items: center;
@@ -576,7 +578,6 @@
                 <div class="progress-bar" style="width: 25%"></div>
               </div>
               <div id="timer"></div>
-
               <button id="stopTimer">타이머 멈추기</button>
             </div>
           </div>
@@ -623,38 +624,48 @@
               <button id="prstopTimer">타이머 멈추기</button>
             </div>
           </div>
-          <div class="b-example-divider"></div>
+          <!-- <div class="b-example-divider"></div> -->
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <!-- 디데이 계산기 -->
-            <div style="display: inline-block" class="box box3">
-              <br />
-              <br />
-              <div id="dDayHead">
-                <img
-                  width="48"
-                  height="48"
-                  src="https://img.icons8.com/emoji/48/calendar-emoji.png"
-                  alt="calendar-emoji"
-                />
-                D-Day
-              </div>
-              <br />
+            <!-- d-day 계산기 -->
+            <div class="box box4" style="text-align: center">
+              <h3>D-day 계산기</h3>
+              <label for="dday-input">D-day 날짜:</label>
               <input type="date" id="dday-input" />
-              <br />
-              <button onclick="calculateRemainingDays()" id="remainingDays">
-                계산하기
-              </button>
-              <button onclick="dDayReset()" id="ResetDday">재설정</button>
+              <button onclick="calculateRemainingDays()">계산하기</button>
               <p id="result"></p>
-              <br />
+          </div>
+          <div class="col-sm-6 col-lg-4 mb-1">
+            <div
+              style="background-color: rgba(0, 0, 0, 0)"
+              class="box box3 boxC"
+            >
+              <div id="calendar">
+                <div
+                  style="display: flex; align-items: center; opacity: 0.9"
+                  id="calendar_header"
+                >
+                  <i class="icon-chevron-left"></i>
+                  <h1></h1>
+                  <i class="icon-chevron-right"></i>
+                </div>
+                <div id="calendar_weekdays"></div>
+                <div id="calendar_content"></div>
+              </div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
-          </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
+            <div class="box box3">
+              <div
+                style="
+                  width: 500px;
+                  height: 300px;
+                  border-radius: 10%;
+                  opacity: 0.8;
+                "
+                id="map"
+              ></div>
+            </div>
           </div>
           <div class="b-example-divider"></div>
           <div class="b-example-divider"></div>
@@ -663,7 +674,13 @@
         </div>
       </div>
     </div>
-
+    <script src="./js/map.js"></script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+    ></script>
+    <script src="./js/calendar.js"></script>
     <script src="./js/engWord.js"></script>
     <script src="./js/color.js"></script>
     <script src="./js/food.js"></script>
@@ -680,10 +697,10 @@
     <!-- 가장 하단에서 가장 상단으로 가는 버튼 -->
     <button id="scrollToTopBtn" class="goupbtn" onclick="scrollToTop()">
       <img
-        width="48"
-        height="48"
-        src="https://img.icons8.com/emoji/48/top-arrow-emoj.png"
-        alt="top-arrow-emoj"
+        width="50"
+        height="50"
+        src="https://img.icons8.com/ios-filled/50/circled-up.png"
+        alt="circled-up"
       />
     </button>
 
