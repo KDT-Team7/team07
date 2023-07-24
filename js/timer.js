@@ -22,12 +22,19 @@ $(document).ready(function () {
   });
 });
 
+$('input[type="number"]').on("change", function () {
+  if ($(this).val() < 10) {
+    $(this).val($(this).val().padStart(2, "0"));
+    $(this).val($(this).val().slice(-2));
+  } else $(this).val(v);
+});
+
 //타이머 시간설정
 
 function putTime(e) {
   m = parseInt($(".minBox").val());
   s = parseInt($(".secBox").val());
-  $(e).html(`${m}:${s}`);
+  $(e).html(`${m}분${s}초`);
   totalTime += m * 60 + s;
   console.log(totalTime);
 
@@ -81,23 +88,54 @@ function updateBar1(numTime, totTime, prName) {
 
 $(".startTimer").on("click", function () {
   console.log(time3Time);
+  $(".startTimer").text("시작");
+  $(".startTimer").attr("disabled", true);
+  $(".startTimer").attr("style", "background-color: darkgrey");
   let prtimerID = setInterval(function () {
     if (time3Time > 0) {
       time3Time -= 1;
       console.log(time3Time);
+      $(".pb3 .progress-bar").html(
+        `${Math.floor(time3Time / 60)}분${time3Time % 60}초`
+      );
       updateBar1(time3Time, totalTime, ".pb3");
     } else if (time2Time > 0) {
       time2Time -= 1;
       console.log(time2Time);
+      $(".pb2 .progress-bar").html(
+        `${Math.floor(time2Time / 60)}분${time2Time % 60}초`
+      );
       updateBar1(time2Time, totalTime, ".pb2");
     } else if (time1Time > 0) {
       time1Time -= 1;
       console.log(time1Time);
+      $(".pb1 .progress-bar").html(
+        `${Math.floor(time1Time / 60)}분${time1Time % 60}초`
+      );
       updateBar1(time1Time, totalTime, ".pb1");
     } else clearInterval(prtimerID);
   }, 1000);
 
   $("#prstopTimer").click(function () {
     clearInterval(prtimerID);
+    $(".startTimer").text("이어서");
+    $(".startTimer").attr("disabled", false);
+    $(".startTimer").attr("style", "background-color: black");
   });
+});
+
+$(".resetTimer").on("click", function () {
+  $(".time").attr("disabled", false);
+  $(".startTimer").text("시작");
+  $(".startTimer").attr("disabled", false);
+  $(".time1").text("일정1");
+  $(".time2").text("일정2");
+  $(".time3").text("일정3");
+  time1Time = 0;
+  time2Time = 0;
+  time3Time = 0;
+  totalTime = 0;
+  updateBar(time1Time, totalTime, ".pb1");
+  updateBar(time2Time, totalTime, ".pb2");
+  updateBar(time3Time, totalTime, ".pb3");
 });
