@@ -314,6 +314,58 @@
 
         }
     </style>
+    <!-- 타이머 CSS -->
+    <style>
+      .boxC {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        display: none;
+      }
+
+      .inputSection {
+        display: flex;
+        align-items: center;
+        width: 80%;
+      }
+
+      .time {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .time1 {
+        background-color: rgb(13, 115, 253);
+      }
+
+      .time2 {
+        background-color: rgb(25, 135, 84);
+      }
+
+      .time3 {
+        background-color: rgb(13, 202, 240);
+      }
+
+      .timer {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        font-weight: 500;
+        color: white;
+        background-color: black;
+      }
+    </style>
     <!-- 애니메이션 CSS -->
     <style>
       .animate__fadeOut {
@@ -564,67 +616,6 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3 boxB" onclick="buttonClicked()">
-              <div
-                class="progress"
-                role="progressbar"
-                aria-label="Basic example"
-                aria-valuenow="0"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                style="width: 500px"
-              >
-                <div class="progress-bar" style="width: 25%"></div>
-              </div>
-              <div id="timer"></div>
-
-              <button id="stopTimer">타이머 멈추기</button>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3 boxC" onclick="buttonClicked()">
-              <div class="progress-stacked" style="width: 300px">
-                <div
-                  class="progress pb1"
-                  role="progressbar"
-                  aria-label="Segment one"
-                  aria-valuenow="15"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 50%; min-width: 50%"
-                >
-                  <div class="progress-bar"></div>
-                </div>
-                <div
-                  class="progress pb2"
-                  role="progressbar"
-                  aria-label="Segment two"
-                  aria-valuenow="30"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 50%"
-                >
-                  <div class="progress-bar bg-success"></div>
-                </div>
-                <div
-                  class="progress pb3"
-                  role="progressbar"
-                  aria-label="Segment three"
-                  aria-valuenow="20"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 0%"
-                >
-                  <div class="progress-bar bg-info"></div>
-                </div>
-              </div>
-
-              <!-- <div id="prtimer"></div> -->
-
-              <button id="prstopTimer">타이머 멈추기</button>
-            </div>
-          </div>
           <!-- <div class="b-example-divider"></div> -->
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
@@ -686,6 +677,123 @@
               ></div>
             </div>
           </div>
+          <div class="col-sm-6 col-lg-8 mb-1">
+            <div class="box box3 boxC" onclick="buttonClicked()">
+              <div class="inputSection">
+                <input
+                  type="number"
+                  class="minBox"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    font-size: 70px;
+                    border-radius: 10%;
+                  "
+                  value="00"
+                  min="0"
+                  max="59"
+                />
+                <p style="font-size: 70px; padding-top: 15px">:</p>
+                <input
+                  type="number"
+                  class="secBox"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    font-size: 70px;
+                    border-radius: 10%;
+                  "
+                  value="00"
+                  min="00"
+                  max="59"
+                />
+
+                <button
+                  class="time time1"
+                  onclick="putTime(this)"
+                  style="margin-left: 100px"
+                >
+                  일정1
+                </button>
+                <button
+                  class="time time2"
+                  onclick="putTime(this)"
+                  style="margin-left: 50px"
+                >
+                  일정2
+                </button>
+                <button
+                  class="time time3"
+                  onclick="putTime(this)"
+                  style="margin-left: 50px"
+                >
+                  일정3
+                </button>
+              </div>
+
+              <div class="timerBarSection" style="width: 100%">
+                <div
+                  class="progress-stacked"
+                  style="
+                    width: 80%;
+                    height: 30px;
+                    margin: 0 auto;
+                    background-color: darkgray;
+                  "
+                >
+                  <div
+                    class="progress pb1"
+                    role="progressbar"
+                    aria-label="Segment one"
+                    aria-valuenow="50"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar"></div>
+                  </div>
+                  <div
+                    class="progress pb2"
+                    role="progressbar"
+                    aria-label="Segment two"
+                    aria-valuenow="30"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-success"></div>
+                  </div>
+                  <div
+                    class="progress pb3"
+                    role="progressbar"
+                    aria-label="Segment three"
+                    aria-valuenow="20"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-info"></div>
+                  </div>
+                  <div
+                    class="progress pb4"
+                    role="progressbar"
+                    aria-label="Segment four"
+                    aria-valuenow="20"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-warning"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="buttonSection">
+                <button class="timer startTimer" id="prstartTimer">시작</button>
+                <button class="timer stopTimer" id="prstopTimer">정지</button>
+              </div>
+            </div>
+          </div>
           <div class="b-example-divider"></div>
           <div class="b-example-divider"></div>
           <!-- 페이지 하단 -->
@@ -699,6 +807,7 @@
       defer
       src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
     ></script>
+    <script src="./js/timer.js"></script>
     <script src="./js/calendar.js"></script>
     <script src="./js/engWord.js"></script>
     <script src="./js/color.js"></script>
