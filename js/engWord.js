@@ -216,4 +216,8 @@ function engWordButton() {
   const randomNum = Math.floor(Math.random() * 210 + 1);
   engWord[0].innerHTML =
     wordList[randomNum - 1].word + "<br>" + wordList[randomNum - 1].meaning;
+  $(engWord).addClass("animate__animated animate__zoomInDown");
+  setTimeout(() => {
+    engWord.removeClass("antimate__animated animate__zoomInDown");
+  }, 1000);
 }
