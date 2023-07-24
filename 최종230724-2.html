@@ -994,31 +994,6 @@
       });
     </script>
 
-    <!-- 타이머 -->
-    <script>
-      let prtime = 10;
-      let prmaxTime = prtime;
-      let prmin = 0;
-      let prsec = 0;
-      let prpercent = 0;
-
-      $(document).ready(function () {
-        prtimerID = setInterval(function () {
-          prtime -= 1;
-          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
-          prmin = Math.floor(prtime / 60);
-          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
-          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
-          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
-          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
-        }, 1000);
-
-        $("#stopTimer").click(function () {
-          clearInterval(prtimerID);
-        });
-      });
-    </script>
-
     <script>
       //페이지 가장 하단에 문구 출력
       // 랜덤한 문구 목록
@@ -1045,55 +1020,6 @@
       function buttonClicked() {
         // 버튼 클릭 시 실행할 동작을 추가하세요.
       }
-    </script>
-
-    <!-- 타이머 -->
-    <script>
-      let time = 120;
-      let maxTime = time;
-      let min = 0;
-      let sec = 0;
-      let percent = 0;
-
-      $(document).ready(function () {
-        timerID = setInterval(function () {
-          time -= 1;
-          percent = ((100 / maxTime) * time).toFixed(0);
-          min = Math.floor(time / 60);
-          sec = ((time / 60 - min) * 60).toFixed(0);
-          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
-          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
-        }, 1000);
-
-        $("#stopTimer").click(function () {
-          clearInterval(timerID);
-        });
-      });
-    </script>
-
-    <!-- 타이머 -->
-    <script>
-      let prtime = 10;
-      let prmaxTime = prtime;
-      let prmin = 0;
-      let prsec = 0;
-      let prpercent = 0;
-
-      $(document).ready(function () {
-        prtimerID = setInterval(function () {
-          prtime -= 1;
-          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
-          prmin = Math.floor(prtime / 60);
-          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
-          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
-          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
-          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
-        }, 1000);
-
-        $("#stopTimer").click(function () {
-          clearInterval(prtimerID);
-        });
-      });
     </script>
 
     <!-- 하단 문구 출력 js 파일 -->
