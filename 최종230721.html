@@ -94,7 +94,7 @@
         background-color: rgb(243, 238, 238, 0.85);
 
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease, transform 0.3s ease;
         display: flex;
         align-items: center;
@@ -395,6 +395,7 @@
                   id="ToDoListValue"
                   type="text"
                   placeholder="오늘의 리스트를 써주세요!"
+                  onkeydown="handleKeyDown(event)"
                 />
                 <button
                   style="border-radius: 15%"
@@ -430,11 +431,10 @@
                       <img
                         width="48"
                         height="48"
-                        src="https://img.icons8.com/emoji/48/necktie.png"
-                        alt="necktie"
+                        src="https://img.icons8.com/emoji/48/woman-artist.png"
+                        alt="woman-artist"
                       /><br />
                       click here
-                      <!-- 오늘 무슨 색 입지? -->
                     </button>
                     <br />
                     <br />
@@ -442,7 +442,7 @@
                       style="font-weight: 900; background-color: transparent"
                       id="selectedColor"
                     >
-                      오늘 무슨 색 입지?
+                      오늘의 컬러
                     </h3>
                   </div>
                 </div>
@@ -578,6 +578,7 @@
                 <div class="progress-bar" style="width: 25%"></div>
               </div>
               <div id="timer"></div>
+
               <button id="stopTimer">타이머 멈추기</button>
             </div>
           </div>
@@ -627,13 +628,31 @@
           <!-- <div class="b-example-divider"></div> -->
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <!-- d-day 계산기 -->
-            <div class="box box4" style="text-align: center">
-              <h3>D-day 계산기</h3>
-              <label for="dday-input">D-day 날짜:</label>
+            <div style="display: block; text-align: center" class="box box3">
+              <br />
+              <br />
+              <div id="dDayHead">
+                <img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/emoji/48/calendar-emoji.png"
+                  alt="calendar-emoji"
+                />
+                디데이 계산기
+              </div>
+              <br />
               <input type="date" id="dday-input" />
-              <button onclick="calculateRemainingDays()">계산하기</button>
+
+              <button onclick="calculateRemainingDays()" id="remainingDays">
+                계산하기
+              </button>
+              <button onclick="dDayReset()" id="ResetDday">재설정</button>
+              <br />
+              <br />
               <p id="result"></p>
+              <br />
+              <br />
+            </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
             <div
@@ -687,6 +706,7 @@
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
+
     <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
@@ -697,10 +717,10 @@
     <!-- 가장 하단에서 가장 상단으로 가는 버튼 -->
     <button id="scrollToTopBtn" class="goupbtn" onclick="scrollToTop()">
       <img
-        width="50"
-        height="50"
-        src="https://img.icons8.com/ios-filled/50/circled-up.png"
-        alt="circled-up"
+        width="48"
+        height="48"
+        src="https://img.icons8.com/emoji/48/backhand-index-pointing-up-emoji.png"
+        alt="backhand-index-pointing-up-emoji"
       />
     </button>
 

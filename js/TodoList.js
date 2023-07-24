@@ -34,3 +34,10 @@ function doneList(count) {
   $(doneButton).children().first().css("text-decoration", "line-through");
   $(doneButton).children().first().css("opacity", "0.3");
 }
+
+function handleKeyDown(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    addToDoList();
+  }
+}
