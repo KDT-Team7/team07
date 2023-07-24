@@ -395,6 +395,7 @@
                   id="ToDoListValue"
                   type="text"
                   placeholder="오늘의 리스트를 써주세요!"
+                  onkeydown="handleKeyDown(event)"
                 />
                 <button
                   style="border-radius: 15%"
@@ -430,11 +431,10 @@
                       <img
                         width="48"
                         height="48"
-                        src="https://img.icons8.com/emoji/48/necktie.png"
-                        alt="necktie"
+                        src="https://img.icons8.com/emoji/48/woman-artist.png"
+                        alt="woman-artist"
                       /><br />
                       click here
-                      <!-- 오늘 무슨 색 입지? -->
                     </button>
                     <br />
                     <br />
@@ -442,7 +442,7 @@
                       style="font-weight: 900; background-color: transparent"
                       id="selectedColor"
                     >
-                      오늘 무슨 색 입지?
+                      오늘의 컬러
                     </h3>
                   </div>
                 </div>
@@ -557,7 +557,7 @@
                   행운의 로또 번호
                 </button>
                 <br />
-                <div id="lotteryClick"></div>
+                <div id="lotteryClick">click here</div>
                 <br />
                 <h3 id="lottery1"></h3>
                 <h3 id="lottery2"></h3>
@@ -638,17 +638,19 @@
                   src="https://img.icons8.com/emoji/48/calendar-emoji.png"
                   alt="calendar-emoji"
                 />
-                D-Day
+                디데이 계산기
               </div>
               <br />
               <input type="date" id="dday-input" />
-              <br />
-              <br />
+
               <button onclick="calculateRemainingDays()" id="remainingDays">
                 계산하기
               </button>
               <button onclick="dDayReset()" id="ResetDday">재설정</button>
+              <br />
+              <br />
               <p id="result"></p>
+              <br />
               <br />
             </div>
           </div>
@@ -715,10 +717,10 @@
     <!-- 가장 하단에서 가장 상단으로 가는 버튼 -->
     <button id="scrollToTopBtn" class="goupbtn" onclick="scrollToTop()">
       <img
-        width="50"
-        height="50"
-        src="https://img.icons8.com/ios-filled/50/circled-up.png"
-        alt="circled-up"
+        width="48"
+        height="48"
+        src="https://img.icons8.com/emoji/48/backhand-index-pointing-up-emoji.png"
+        alt="backhand-index-pointing-up-emoji"
       />
     </button>
 

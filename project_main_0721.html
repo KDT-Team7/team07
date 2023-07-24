@@ -632,7 +632,11 @@
               <h3>D-day 계산기</h3>
               <label for="dday-input">D-day 날짜:</label>
               <input type="date" id="dday-input" />
-              <button onclick="calculateRemainingDays()">계산하기</button>
+              <br />
+              <button onclick="calculateRemainingDays()" id="remainingDays">
+                계산하기
+              </button>
+              <button onclick="dDayReset()" id="ResetDday">재설정</button>
               <p id="result"></p>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">

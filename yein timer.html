@@ -42,8 +42,6 @@
     <link rel="stylesheet" href="./css/engWord.css" />
     <!-- 로또번호 -->
     <link rel="stylesheet" href="./css/lottery.css" />
-    <!-- 디데이 계산기 -->
-    <link rel="stylesheet" href="./css/dDay.css" />
     <!-- 배경 영상 크기조절 -->
     <style>
       body {
@@ -98,7 +96,6 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        border-radius: 10%;
       }
 
       .box:hover {
@@ -128,11 +125,6 @@
       .box4 {
         height: 300px;
         margin-bottom: 15px;
-      }
-      .align-items0 {
-        align-items: baseline;
-        opacity: 100%;
-        z-index: 2;
       }
       /* banner 사이즈 조정 */
       .banner {
@@ -327,6 +319,64 @@
         --animate-duration: 0.5s;
       }
     </style>
+
+    <!-- 타이머 CSS -->
+    <style>
+      .boxC {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        display: none;
+      }
+
+      .inputSection {
+        display: flex;
+        align-items: center;
+        width: 80%;
+      }
+
+      .time {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .time1 {
+        background-color: rgb(13, 115, 253);
+      }
+
+      .time2 {
+        background-color: rgb(25, 135, 84);
+      }
+
+      .time3 {
+        background-color: rgb(13, 202, 240);
+      }
+
+      .timer {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        font-weight: 500;
+        color: white;
+        background-color: black;
+      }
+    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+    />
   </head>
   <body>
     <script
@@ -360,7 +410,7 @@
       <div class="container">
         <div class="row">
           <!-- 날씨 box -->
-          <div class="col-sm-12 col-lg-12 mb-1">
+          <div class="col-sm-6 col-lg-12 mb-1">
             <div class="box box0">
               <div id="current">
                 <div class="current iconDes"></div>
@@ -376,9 +426,9 @@
             </div>
           </div>
           <!-- main box -->
-          <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
-            <div class="align-items0 box box1">
-              <div class="toDoList">
+          <div class="col-sm-6 col-lg-6 mb-1">
+            <div class="box box1">
+              <div>
                 <br />
                 <h3 class="animate__animated animate__bounce" id="todoHeader">
                   <img
@@ -406,17 +456,17 @@
                     alt="plus-emoji"
                   />
                 </button>
-                <ul style="font-weight: 600" id="ul">
+                <ul style="font-weight: 500" id="ul">
                   <div style="height: 5px"></div>
                 </ul>
               </div>
             </div>
           </div>
           <!-- main 오른쪽 옆칸 box -->
-          <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+          <div class="col-sm-6 col-lg-6 mb-1">
             <div class="row">
-              <div class="col-sm-6 col-lg-6 mb-1">
-                <div class="align-items0 box box2">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2">
                   <div style="text-align: center">
                     <br />
                     <br />
@@ -445,17 +495,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-6 mb-1">
-                <div class="align-items0 box box2" id="dayPhraseBox">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2" id="dayPhraseBox">
                   <div style="text-align: center">
                     <!-- 오늘의 명언 -->
-                    <br />
-                    <br />
-                    <button
-                      style="border-radius: 15%"
-                      id="dayPhrase"
-                      onclick="phrase()"
-                    >
+                    <h6 id="phrase"></h6>
+                    <button id="dayPhrase" onclick="phrase()">
                       <img
                         width="30"
                         height="30"
@@ -464,21 +509,16 @@
                       />
                       오늘의 명언
                       <br />
-                      click here
                     </button>
-                    <br />
-                    <br />
-                    <h6 id="phrase"></h6>
+                    <div id="dayPhraseDiv">click here</div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6 col-lg-6 mb-1">
-                <div class="align-items0 box box2">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2">
                   <div style="text-align: center">
-                    <br />
-                    <br />
                     <button
                       style="border-radius: 15%"
                       id="foodButton"
@@ -495,21 +535,20 @@
                     </button>
                     <br />
                     <br />
-                    <!-- <h3
+                    <h3
                       style="font-weight: 900; background-color: transparent"
                       id="selectedColor"
                     >
                       오늘 뭐 먹지?
-                    </h3> -->
-                    <h3 style="font-weight: 900" id="food">오늘 뭐 먹지?</h3>
+                    </h3>
+                    <h3 id="food"></h3>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-6 mb-1">
-                <div class="align-items0 box box2">
+              <div class="col-sm-12 col-lg-6 mb-1">
+                <div class="box box2">
                   <div style="text-align: center">
-                    <br />
-                    <br />
+                    <h4 style="font-weight: 600" id="engWord"></h4>
                     <button
                       style="border-radius: 15%"
                       id="engWordBtn"
@@ -523,11 +562,9 @@
                         alt="writing-hand"
                       />
                       오늘의 영단어 <br />
-                      click here
                     </button>
+                    <div id="engWordDiv">click here</div>
                     <br />
-                    <br />
-                    <h4 style="font-weight: 600" id="engWord"></h4>
                   </div>
                 </div>
               </div>
@@ -537,7 +574,7 @@
           <div class="b-example-divider"></div>
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="align-items0 box box3">
+            <div class="box box3">
               <div style="text-align: center">
                 <br />
                 <br />
@@ -563,103 +600,135 @@
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3 boxB" onclick="buttonClicked()">
-              <div
-                class="progress"
-                role="progressbar"
-                aria-label="Basic example"
-                aria-valuenow="0"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                style="width: 500px"
-              >
-                <div class="progress-bar" style="width: 25%"></div>
-              </div>
-              <div id="timer"></div>
-
-              <button id="stopTimer">타이머 멈추기</button>
-            </div>
+            <div class="box box4"></div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3 boxC" onclick="buttonClicked()">
-              <div class="progress-stacked" style="width: 300px">
-                <div
-                  class="progress pb1"
-                  role="progressbar"
-                  aria-label="Segment one"
-                  aria-valuenow="15"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 50%; min-width: 50%"
-                >
-                  <div class="progress-bar"></div>
-                </div>
-                <div
-                  class="progress pb2"
-                  role="progressbar"
-                  aria-label="Segment two"
-                  aria-valuenow="30"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 50%"
-                >
-                  <div class="progress-bar bg-success"></div>
-                </div>
-                <div
-                  class="progress pb3"
-                  role="progressbar"
-                  aria-label="Segment three"
-                  aria-valuenow="20"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 0%"
-                >
-                  <div class="progress-bar bg-info"></div>
-                </div>
-              </div>
-
-              <!-- <div id="prtimer"></div> -->
-
-              <button id="prstopTimer">타이머 멈추기</button>
-            </div>
+            <div class="box box4"></div>
           </div>
+
           <div class="b-example-divider"></div>
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <!-- 디데이 계산기 -->
-            <div style="display: inline-block" class="box box3">
-              <br />
-              <br />
-              <div id="dDayHead">
-                <img
-                  width="48"
-                  height="48"
-                  src="https://img.icons8.com/emoji/48/calendar-emoji.png"
-                  alt="calendar-emoji"
+            <div class="box box4"></div>
+          </div>
+          <div class="col-sm-6 col-lg-8 mb-1">
+            <div class="box box3 boxC" onclick="buttonClicked()">
+              <div class="inputSection">
+                <input
+                  type="number"
+                  class="minBox"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    font-size: 70px;
+                    border-radius: 10%;
+                  "
+                  value="00"
+                  min="0"
+                  max="59"
                 />
-                D-Day
+                <p style="font-size: 70px; padding-top: 15px">:</p>
+                <input
+                  type="number"
+                  class="secBox"
+                  style="
+                    width: 100px;
+                    height: 100px;
+                    font-size: 70px;
+                    border-radius: 10%;
+                  "
+                  value="00"
+                  min="00"
+                  max="59"
+                />
+
+                <button
+                  class="time time1"
+                  onclick="putTime(this)"
+                  style="margin-left: 100px"
+                >
+                  일정1
+                </button>
+                <button
+                  class="time time2"
+                  onclick="putTime(this)"
+                  style="margin-left: 50px"
+                >
+                  일정2
+                </button>
+                <button
+                  class="time time3"
+                  onclick="putTime(this)"
+                  style="margin-left: 50px"
+                >
+                  일정3
+                </button>
               </div>
-              <br />
-              <input type="date" id="dday-input" />
-              <br />
-              <button onclick="calculateRemainingDays()" id="remainingDays">
-                계산하기
-              </button>
-              <button onclick="dDayReset()" id="ResetDday">재설정</button>
-<<<<<<< HEAD
-              <br />
-=======
->>>>>>> copy
-              <p id="result"></p>
-              <br />
+
+              <div class="timerBarSection" style="width: 100%">
+                <div
+                  class="progress-stacked"
+                  style="
+                    width: 80%;
+                    height: 30px;
+                    margin: 0 auto;
+                    background-color: darkgray;
+                  "
+                >
+                  <div
+                    class="progress pb1"
+                    role="progressbar"
+                    aria-label="Segment one"
+                    aria-valuenow="50"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar"></div>
+                  </div>
+                  <div
+                    class="progress pb2"
+                    role="progressbar"
+                    aria-label="Segment two"
+                    aria-valuenow="30"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-success"></div>
+                  </div>
+                  <div
+                    class="progress pb3"
+                    role="progressbar"
+                    aria-label="Segment three"
+                    aria-valuenow="20"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-info"></div>
+                  </div>
+                  <div
+                    class="progress pb4"
+                    role="progressbar"
+                    aria-label="Segment four"
+                    aria-valuenow="20"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    <div class="progress-bar bg-warning"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="buttonSection">
+                <button class="timer startTimer" id="prstartTimer">시작</button>
+                <button class="timer stopTimer" id="prstopTimer">정지</button>
+              </div>
             </div>
           </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
-          </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
-          </div>
+
           <div class="b-example-divider"></div>
           <div class="b-example-divider"></div>
           <!-- 페이지 하단 -->
@@ -667,6 +736,7 @@
         </div>
       </div>
     </div>
+    <script></script>
 
     <script src="./js/engWord.js"></script>
     <script src="./js/color.js"></script>
@@ -674,7 +744,6 @@
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
-    <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
@@ -684,10 +753,10 @@
     <!-- 가장 하단에서 가장 상단으로 가는 버튼 -->
     <button id="scrollToTopBtn" class="goupbtn" onclick="scrollToTop()">
       <img
-        width="48"
-        height="48"
-        src="https://img.icons8.com/emoji/48/top-arrow-emoj.png"
-        alt="top-arrow-emoj"
+        width="50"
+        height="50"
+        src="https://img.icons8.com/ios-filled/50/circled-up.png"
+        alt="circled-up"
       />
     </button>
 
@@ -828,8 +897,8 @@
       }
     </script>
 
-    <!-- 타이머 -->
-    <script>
+    <!-- 단순 타이머 -->
+    <!-- <script>
       let time = 120;
       let maxTime = time;
       let min = 0;
@@ -850,105 +919,110 @@
           clearInterval(timerID);
         });
       });
-    </script>
+    </script> -->
 
-    <!-- 타이머 -->
+    <!-- 여러 일정 타이머 JS -->
     <script>
-      let prtime = 10;
-      let prmaxTime = prtime;
-      let prmin = 0;
-      let prsec = 0;
-      let prpercent = 0;
+      let m = 0;
+      let s = 0;
+
+      let totalTime = 0;
+      let time1Time = 0;
+      let time2Time = 0;
+      let time3Time = 0;
+
+      //분, 초 입력
 
       $(document).ready(function () {
-        prtimerID = setInterval(function () {
-          prtime -= 1;
-          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
-          prmin = Math.floor(prtime / 60);
-          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
-          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
-          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
-          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
-        }, 1000);
+        $('input[type="number"]').on("keyup", function () {
+          v = parseInt($(this).val());
+          min = parseInt($(this).attr("min"));
+          max = parseInt($(this).attr("max"));
 
-        $("#stopTimer").click(function () {
-          clearInterval(prtimerID);
+          if (v < min) {
+            $(this).val(min);
+          } else if (v > max) {
+            $(this).val(max);
+          }
         });
       });
-    </script>
 
-    <script>
-      //페이지 가장 하단에 문구 출력
-      // 랜덤한 문구 목록
-      const messages = [
-        "좋은 아침입니다!",
-        "Guten Morgen!",
-        "¡Buenos días!",
-        "おはようございます！",
-        "Bonjour !",
-      ];
+      //타이머 시간설정
 
-      // 랜덤한 문구 선택 및 출력
-      function displayRandomMessage() {
-        const messageContainer = document.querySelector(".day_msg");
-        const randomIndex = Math.floor(Math.random() * messages.length);
-        const randomMessage = messages[randomIndex];
-        messageContainer.textContent = randomMessage;
+      function putTime(e) {
+        m = parseInt($(".minBox").val());
+        s = parseInt($(".secBox").val());
+        $(e).html(`${m}:${s}`);
+        totalTime += m * 60 + s;
+        console.log(totalTime);
+
+        if ($(e).hasClass("time1")) {
+          time1Time = m * 60 + s;
+          $(".pb1 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+        if ($(e).hasClass("time2")) {
+          time2Time = m * 60 + s;
+          $(".pb2 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+
+        if ($(e).hasClass("time3")) {
+          time3Time = m * 60 + s;
+          $(".pb3 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+
+        $(e).attr("disabled", true);
       }
 
-      // 페이지 로드 시 랜덤한 문구 출력
-      window.addEventListener("load", displayRandomMessage);
-    </script>
-    <script>
-      function buttonClicked() {
-        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      function updateBar(numTime, totTime, prName) {
+        let updatePer = (numTime / totTime) * 100;
+        if (isNaN(updatePer)) {
+          $(`${prName}`).attr("style", `width: 0%; min-width: 0%`);
+        } else {
+          $(`${prName}`).attr(
+            "style",
+            `width: ${updatePer}%; min-width: ${updatePer}%; height: 30px`
+          );
+        }
       }
-    </script>
 
-    <!-- 타이머 -->
-    <script>
-      let time = 120;
-      let maxTime = time;
-      let min = 0;
-      let sec = 0;
-      let percent = 0;
+      function updateBar1(numTime, totTime, prName) {
+        let updatePer = (numTime / totTime) * 100;
+        $(`${prName}`).attr(
+          "style",
+          `width: ${updatePer}%; min-width: 0%; height: 30px`
+        );
+      }
 
-      $(document).ready(function () {
-        timerID = setInterval(function () {
-          time -= 1;
-          percent = ((100 / maxTime) * time).toFixed(0);
-          min = Math.floor(time / 60);
-          sec = ((time / 60 - min) * 60).toFixed(0);
-          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
-          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
+      // 타이머 작동
+
+      $(".startTimer").on("click", function () {
+        console.log(time3Time);
+        let prtimerID = setInterval(function () {
+          if (time3Time > 0) {
+            time3Time -= 1;
+            console.log(time3Time);
+            updateBar1(time3Time, totalTime, ".pb3");
+          } else if (time2Time > 0) {
+            time2Time -= 1;
+            console.log(time2Time);
+            updateBar1(time2Time, totalTime, ".pb2");
+          } else if (time1Time > 0) {
+            time1Time -= 1;
+            console.log(time1Time);
+            updateBar1(time1Time, totalTime, ".pb1");
+          } else clearInterval(prtimerID);
         }, 1000);
 
-        $("#stopTimer").click(function () {
-          clearInterval(timerID);
-        });
-      });
-    </script>
-
-    <!-- 타이머 -->
-    <script>
-      let prtime = 10;
-      let prmaxTime = prtime;
-      let prmin = 0;
-      let prsec = 0;
-      let prpercent = 0;
-
-      $(document).ready(function () {
-        prtimerID = setInterval(function () {
-          prtime -= 1;
-          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
-          prmin = Math.floor(prtime / 60);
-          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
-          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
-          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
-          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
-        }, 1000);
-
-        $("#stopTimer").click(function () {
+        $("#prstopTimer").click(function () {
           clearInterval(prtimerID);
         });
       });
