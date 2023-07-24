@@ -36,14 +36,14 @@
   background-color: #f8f8f8;
 }
 #calendar_content div.blank {
-  background-color: #e8e8e8;
-  opacity: 0.4;
+  background-color: white;
+  opacity: 1;
 }
 #calendar_header,
 #calendar_content div.today {
   zoom: 1;
   filter: alpha(opacity=70);
-  opacity: 0.7;
+  opacity: 1;
 }
 #calendar_content div.today {
   color: #ffffff;

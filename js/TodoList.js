@@ -24,7 +24,7 @@ function addToDoList() {
 }
 function removeList(count) {
   let removeButton = $(`#removeButton${count}`).parent();
-  $(removeButton).addClass("animate__animated animate__fadeOut");
+  $(removeButton).addClass("animate__animated animate__bounceOutLeft");
   setTimeout(function () {
     $(removeButton).remove();
   }, 400);

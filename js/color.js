@@ -173,6 +173,6 @@ function colorButton() {
   }
   $(selectedColor).addClass("animate__animated animate__flipInY");
   setTimeout(() => {
-    selectedColor.removeClass("antimate__animated animate__flipInY");
+    selectedColor.removeClass("animate__animated animate__flipInY");
   }, 500);
 }

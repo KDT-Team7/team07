@@ -24,11 +24,17 @@ function calculateRemainingDays() {
 
   if (remainingDays > 0) {
     resultElement.innerHTML = `D-${remainingDays}`;
+    $(resultElement).addClass("animate__animated animate__tada");
   } else if (remainingDays === 0) {
     resultElement.innerHTML = "D-DAY";
+    $(resultElement).addClass("animate__animated animate__tada");
   } else {
     resultElement.innerHTML = `D+${Math.abs(remainingDays)}`;
+    $(resultElement).addClass("animate__animated animate__tada");
   }
+  setTimeout(() => {
+    $(resultElement).removeClass("animate__animated animate__tada");
+  }, 700);
 }
 
 // 재설정 버튼
