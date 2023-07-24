@@ -325,6 +325,64 @@
         --animate-duration: 0.5s;
       }
     </style>
+
+    <!-- 타이머 CSS -->
+    <style>
+      .boxC {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        display: none;
+      }
+
+      .inputSection {
+        display: flex;
+        align-items: center;
+        width: 80%;
+      }
+
+      .time {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+      }
+
+      .time1 {
+        background-color: rgb(13, 115, 253);
+      }
+
+      .time2 {
+        background-color: rgb(25, 135, 84);
+      }
+
+      .time3 {
+        background-color: rgb(13, 202, 240);
+      }
+
+      .timer {
+        border: white 1px solid;
+        border-radius: 20%;
+        width: 100px;
+        height: 50px;
+        font-size: 15px;
+        font-weight: 500;
+        color: white;
+        background-color: black;
+      }
+    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+    />
   </head>
   <body>
     <script
@@ -561,6 +619,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
+
             <div class="box box3 boxB" onclick="buttonClicked()">
               <div
                 class="progress"
@@ -579,6 +638,9 @@
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
+            <div class="box box4"></div>
+          </div>
+          <div class="col-sm-6 col-lg-8 mb-1">
             <div class="box box3 boxC" onclick="buttonClicked()">
               <div class="progress-stacked" style="width: 300px">
                 <div
@@ -620,6 +682,7 @@
 
               <button id="prstopTimer">타이머 멈추기</button>
             </div>
+
           </div>
           <div class="b-example-divider"></div>
           <!--다음줄 box-->
@@ -629,9 +692,7 @@
           <div class="col-sm-6 col-lg-4 mb-1">
             <div class="box box4"></div>
           </div>
-          <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
-          </div>
+
           <div class="b-example-divider"></div>
           <div class="b-example-divider"></div>
           <!-- 페이지 하단 -->
@@ -639,6 +700,7 @@
         </div>
       </div>
     </div>
+    <script></script>
 
     <script src="./js/engWord.js"></script>
     <script src="./js/color.js"></script>
@@ -771,16 +833,6 @@
     <!-- 상단에 현재 날짜 출력 js 파일 -->
     <script src="./js/currentDate.js"></script>
 
-    <script>
-      //페이지 가장 하단에 문구 출력
-      // 랜덤한 문구 목록
-      const messages = [
-        "좋은 아침입니다!",
-        "Guten Morgen!",
-        "¡Buenos días!",
-        "おはようございます！",
-        "Bonjour !",
-      ];
 
       // 랜덤한 문구 선택 및 출력
       function displayRandomMessage() {
@@ -876,8 +928,8 @@
       }
     </script>
 
-    <!-- 타이머 -->
-    <script>
+    <!-- 단순 타이머 -->
+    <!-- <script>
       let time = 120;
       let maxTime = time;
       let min = 0;
@@ -898,28 +950,110 @@
           clearInterval(timerID);
         });
       });
-    </script>
+    </script> -->
 
-    <!-- 타이머 -->
+    <!-- 여러 일정 타이머 JS -->
     <script>
-      let prtime = 10;
-      let prmaxTime = prtime;
-      let prmin = 0;
-      let prsec = 0;
-      let prpercent = 0;
+      let m = 0;
+      let s = 0;
+
+      let totalTime = 0;
+      let time1Time = 0;
+      let time2Time = 0;
+      let time3Time = 0;
+
+      //분, 초 입력
 
       $(document).ready(function () {
-        prtimerID = setInterval(function () {
-          prtime -= 1;
-          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
-          prmin = Math.floor(prtime / 60);
-          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
-          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
-          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
-          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
+        $('input[type="number"]').on("keyup", function () {
+          v = parseInt($(this).val());
+          min = parseInt($(this).attr("min"));
+          max = parseInt($(this).attr("max"));
+
+          if (v < min) {
+            $(this).val(min);
+          } else if (v > max) {
+            $(this).val(max);
+          }
+        });
+      });
+
+      //타이머 시간설정
+
+      function putTime(e) {
+        m = parseInt($(".minBox").val());
+        s = parseInt($(".secBox").val());
+        $(e).html(`${m}:${s}`);
+        totalTime += m * 60 + s;
+        console.log(totalTime);
+
+        if ($(e).hasClass("time1")) {
+          time1Time = m * 60 + s;
+          $(".pb1 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+        if ($(e).hasClass("time2")) {
+          time2Time = m * 60 + s;
+          $(".pb2 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+
+        if ($(e).hasClass("time3")) {
+          time3Time = m * 60 + s;
+          $(".pb3 .progress-bar").html(`${m}분${s}초`);
+          updateBar(time1Time, totalTime, ".pb1");
+          updateBar(time2Time, totalTime, ".pb2");
+          updateBar(time3Time, totalTime, ".pb3");
+        }
+
+        $(e).attr("disabled", true);
+      }
+
+      function updateBar(numTime, totTime, prName) {
+        let updatePer = (numTime / totTime) * 100;
+        if (isNaN(updatePer)) {
+          $(`${prName}`).attr("style", `width: 0%; min-width: 0%`);
+        } else {
+          $(`${prName}`).attr(
+            "style",
+            `width: ${updatePer}%; min-width: ${updatePer}%; height: 30px`
+          );
+        }
+      }
+
+      function updateBar1(numTime, totTime, prName) {
+        let updatePer = (numTime / totTime) * 100;
+        $(`${prName}`).attr(
+          "style",
+          `width: ${updatePer}%; min-width: 0%; height: 30px`
+        );
+      }
+
+      // 타이머 작동
+
+      $(".startTimer").on("click", function () {
+        console.log(time3Time);
+        let prtimerID = setInterval(function () {
+          if (time3Time > 0) {
+            time3Time -= 1;
+            console.log(time3Time);
+            updateBar1(time3Time, totalTime, ".pb3");
+          } else if (time2Time > 0) {
+            time2Time -= 1;
+            console.log(time2Time);
+            updateBar1(time2Time, totalTime, ".pb2");
+          } else if (time1Time > 0) {
+            time1Time -= 1;
+            console.log(time1Time);
+            updateBar1(time1Time, totalTime, ".pb1");
+          } else clearInterval(prtimerID);
         }, 1000);
 
-        $("#stopTimer").click(function () {
+        $("#prstopTimer").click(function () {
           clearInterval(prtimerID);
         });
       });
