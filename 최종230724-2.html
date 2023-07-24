@@ -336,10 +336,10 @@
       .time {
         border: white 1px solid;
         border-radius: 20%;
-        width: 10%;
+        width: 20%;
         height: 50%;
-        font-size: medium;
-        font-weight: 500;
+        font-size: small;
+        font-weight: bold;
         color: white;
       }
 
@@ -711,21 +711,21 @@
                 <button
                   class="time time1"
                   onclick="putTime(this)"
-                  style="margin-left: 100px"
+                  style="margin-left: 10%"
                 >
                   일정1
                 </button>
                 <button
                   class="time time2"
                   onclick="putTime(this)"
-                  style="margin-left: 50px"
+                  style="margin-left: 10%"
                 >
                   일정2
                 </button>
                 <button
                   class="time time3"
                   onclick="putTime(this)"
-                  style="margin-left: 50px"
+                  style="margin-left: 10%"
                 >
                   일정3
                 </button>
@@ -968,30 +968,6 @@
       function buttonClicked() {
         // 버튼 클릭 시 실행할 동작을 추가하세요.
       }
-    </script>
-
-    <!-- 타이머 -->
-    <script>
-      let time = 120;
-      let maxTime = time;
-      let min = 0;
-      let sec = 0;
-      let percent = 0;
-
-      $(document).ready(function () {
-        timerID = setInterval(function () {
-          time -= 1;
-          percent = ((100 / maxTime) * time).toFixed(0);
-          min = Math.floor(time / 60);
-          sec = ((time / 60 - min) * 60).toFixed(0);
-          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
-          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
-        }, 1000);
-
-        $("#stopTimer").click(function () {
-          clearInterval(timerID);
-        });
-      });
     </script>
 
     <script>
