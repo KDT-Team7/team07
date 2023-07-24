@@ -4,13 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>카드 배열</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <!-- Animation 라이브러리-->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-    <!-- jquery 불러오기 -->
+    <!-- jquery불러오기 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
     <script
       src="https://kit.fontawesome.com/b08ebf6beb.js"
       crossorigin="anonymous"
@@ -21,6 +29,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <!--calendar.css-->
+    <link rel="stylesheet" href="./css/calendar.css" />
     <!-- todoList.css 스타일 적용 -->
     <link rel="stylesheet" href="./css/todoList.css" />
     <!-- 오늘의 추천색 -->
@@ -33,6 +44,8 @@
     <link rel="stylesheet" href="./css/engWord.css" />
     <!-- 로또번호 -->
     <link rel="stylesheet" href="./css/lottery.css" />
+    <!-- 디데이 계산기 -->
+    <link rel="stylesheet" href="./css/dDay.css" />
     <!-- 배경 영상 크기조절 -->
     <style>
       body {
@@ -78,8 +91,7 @@
       /* box에 버튼 효과, hover 효과 추가 */
       .box {
         height: 100px;
-        background-color: rgb(243, 238, 238);
-        opacity: 100%;
+        background-color: rgb(243, 238, 238, 0.85);
 
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -88,6 +100,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        border-radius: 10%;
       }
 
       .box:hover {
@@ -120,6 +133,8 @@
       }
       .align-items0 {
         align-items: baseline;
+        opacity: 100%;
+        z-index: 2;
       }
       /* banner 사이즈 조정 */
       .banner {
@@ -149,7 +164,7 @@
         z-index: 999;
       }
       /* 로또 번호 */
-      #TodoUl > li > p {
+      #ul > li > p {
         display: inline-block;
       }
       #lottery1 > p {
@@ -157,14 +172,6 @@
       }
       #lottery2 > p {
         display: inline-block;
-      }
-      /* Todo 리스트 디자인 수정 */
-      #TodoUl {
-      }
-      #TodoUl > li {
-        border-bottom: 2px red dotted;
-        height: 45px;
-        padding-top: 8px;
       }
 
       /* nav bar 폰트 */
@@ -194,6 +201,7 @@
       .banner_main {
         font-family: "TAEBAEKmilkyway";
         background-color: transparent;
+        font-weight: 500;
       }
       .day_msg {
         font-family: "Yeongdo-Rg";
@@ -205,80 +213,106 @@
     <script src="./js/textColor.js"></script>
     <!-- 날씨 box CSS-->
     <style>
-      #current {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        align-items: center;
-        width: 50%;
-        height: 250px;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
-
-      #current .iconDes {
-        text-align: center;
-        margin-left: 5%;
-        font-weight: 1000;
-      }
-
-      #current .tempFeels {
-        text-align: left;
-      }
-
-      .tempFeels h1 {
-        font-size: 50px;
-        font-weight: 1000;
-      }
-      .tempFeels p {
-        font-weight: 500;
-      }
-      #current .misc {
-        text-align: left;
-        font-weight: 1000;
-
-      }
-
-      #forecast {
-        position: absolute;
-        top: 10px;
-        left: 55%;
-        width: 50%;
-        height: 250px;
-        font-weight: 1000;
-
-      }
-
-      #forecast .row {
-        width: 10vw;
-        height: 125px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        text-align: center;
-        font-size: 10px;
-      }
-      #forecast p {
-        margin: 0;
-        background-color: rgba(255, 255, 255, 0.522)"
-      }
-
-      #forecast img {
-        width: 80px;
-        height: 80px;
-      }
-
-      @media screen and (max-width: 992px) {
-        #forecast  {
-          visibility: hidden;
+        #current {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 50%;
+          height: 250px;
+          position: absolute;
+          top: 0px;
+          left: 0px;
         }
 
+        #current .iconDes {
+          text-align: center;
+          margin-left: 10%;
+          font-weight: 1000;
+        }
+
+        #current .tempFeels {
+          text-align: left;
+          margin-right: 5%;
+        }
+
+        .tempFeels h1 {
+          font-size: 50px;
+          font-weight: 1000;
+        }
+        .tempFeels p {
+          font-weight: 500;
+        }
         #current .misc {
-          visibility: hidden;
+          text-align: left;
+          font-weight: 1000;
+
         }
+
+        #forecast {
+          position: absolute;
+          top: 10px;
+          left: 50%;
+          width: 50%;
+          height: 250px;
+          font-weight: 1000;
+
+        }
+
+        #forecast .row {
+          width: 10vw;
+          min-width: 50px;
+          height: 125px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          text-align: center;
+          font-size: 10px;
+        }
+        #forecast p {
+          margin: 0;
+          background-color: rgba(255, 255, 255, 0.522)"
+        }
+
+        #forecast img {
+          width: 80px;
+          height: 80px;
+        }
+
+      /* 날씨 반응형 */
+
+      @media screen and (max-width: 1200px) {
+        #current .misc {
+          margin-left: 25px;
+        }
+
       }
+
+        @media screen and (max-width: 992px) {
+          #forecast  {
+            visibility: hidden;
+          }
+
+          #current .misc {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: -20px;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          #current .tempFeels {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: 15%
+          }
+
+        }
     </style>
     <!-- 애니메이션 CSS -->
     <style>
@@ -297,6 +331,11 @@
     </style>
   </head>
   <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
     <!-- nav bar -->
     <div class="d-flex justify-content-center py-3">
       <h1 class="nav_bar">
@@ -324,7 +363,7 @@
         <div class="row">
           <!-- 날씨 box -->
           <div class="col-sm-12 col-lg-12 mb-1">
-            <div class="box box0" onclick="buttonClicked()">
+            <div class="box box0">
               <div id="current">
                 <div class="current iconDes"></div>
                 <div class="current tempFeels"></div>
@@ -339,16 +378,37 @@
             </div>
           </div>
           <!-- main box -->
-          <div class="col-sm-6 col-lg-6 mb-1">
-            <div class="box box1" onclick="buttonClicked()">
+          <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
+            <div class="align-items0 box box1">
               <div class="toDoList">
                 <br />
-                <h3 class="animate__animated animate__bounce">ToDoList</h3>
-                <input id="ToDoListValue" type="text" />
-                <button style="border-radius: 15%" onclick="addToDoList()">
-                  등록
+                <h3 class="animate__animated animate__bounce" id="todoHeader">
+                  <img
+                    width="48"
+                    height="48"
+                    src="https://img.icons8.com/emoji/48/man-technologyst.png"
+                    alt="man-technologyst"
+                  />
+                  오늘의 할 일
+                </h3>
+                <input
+                  id="ToDoListValue"
+                  type="text"
+                  placeholder="오늘의 리스트를 써주세요!"
+                />
+                <button
+                  style="border-radius: 15%"
+                  id="toDoBtn"
+                  onclick="addToDoList()"
+                >
+                  <img
+                    width="30"
+                    height="30"
+                    src="https://img.icons8.com/emoji/48/plus-emoji.png"
+                    alt="plus-emoji"
+                  />
                 </button>
-                <ul style="font-weight: 500" id="TodoUl">
+                <ul style="font-weight: 600" id="ul">
                   <div style="height: 5px"></div>
                 </ul>
               </div>
@@ -357,8 +417,8 @@
           <!-- main 오른쪽 옆칸 box -->
           <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
             <div class="row">
-              <div class="col-sm-12 col-lg-6 mb-1">
-                <div class="box box2" onclick="buttonClicked()">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
                   <div style="text-align: center">
                     <br />
                     <br />
@@ -387,30 +447,40 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 col-lg-6 mb-1">
-                <div class="box box2" onclick="buttonClicked()">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2" id="dayPhraseBox">
                   <div style="text-align: center">
                     <!-- 오늘의 명언 -->
-                    <h6 id="phrase"></h6>
-                    <button id="dayPhrase" onclick="phrase()">
+                    <br />
+                    <br />
+                    <button
+                      style="border-radius: 15%"
+                      id="dayPhrase"
+                      onclick="phrase()"
+                    >
                       <img
                         width="30"
                         height="30"
-                        src="https://img.icons8.com/ios/50/saddle-stitched-booklet.png"
-                        alt="saddle-stitched-booklet"
+                        src="https://img.icons8.com/emoji/48/books-emoji.png"
+                        alt="books-emoji"
                       />
                       오늘의 명언
                       <br />
+                      click here
                     </button>
-                    <div id="dayPhraseDiv">click here</div>
+                    <br />
+                    <br />
+                    <h6 id="phrase"></h6>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12 col-lg-6 mb-1">
-                <div class="box box2" onclick="buttonClicked()">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
                   <div style="text-align: center">
+                    <br />
+                    <br />
                     <button
                       style="border-radius: 15%"
                       id="foodButton"
@@ -427,20 +497,21 @@
                     </button>
                     <br />
                     <br />
-                    <h3
+                    <!-- <h3
                       style="font-weight: 900; background-color: transparent"
                       id="selectedColor"
                     >
                       오늘 뭐 먹지?
-                    </h3>
-                    <h3 id="food"></h3>
+                    </h3> -->
+                    <h3 style="font-weight: 900" id="food">오늘 뭐 먹지?</h3>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 col-lg-6 mb-1">
-                <div class="box box2" onclick="buttonClicked()">
+              <div class="col-sm-6 col-lg-6 mb-1">
+                <div class="align-items0 box box2">
                   <div style="text-align: center">
-                    <h4 style="font-weight: 600" id="engWord"></h4>
+                    <br />
+                    <br />
                     <button
                       style="border-radius: 15%"
                       id="engWordBtn"
@@ -448,16 +519,17 @@
                     >
                       <!-- 오늘의 영단어 -->
                       <img
-                        width="32"
-                        height="32"
-                        src="https://img.icons8.com/ios/50/brick.png"
-                        alt="brick"
+                        width="30"
+                        height="30"
+                        src="https://img.icons8.com/emoji/48/writing-hand.png"
+                        alt="writing-hand"
                       />
                       오늘의 영단어 <br />
                       click here
                     </button>
-
                     <br />
+                    <br />
+                    <h4 style="font-weight: 600" id="engWord"></h4>
                   </div>
                 </div>
               </div>
@@ -467,7 +539,7 @@
           <div class="b-example-divider"></div>
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3" onclick="buttonClicked()">
+            <div class="align-items0 box box3">
               <div style="text-align: center">
                 <br />
                 <br />
@@ -482,10 +554,10 @@
                     src="https://img.icons8.com/emoji/48/money-mouth-face.png"
                     alt="money-mouth-face"
                   />
-                  1등 ㄱㄱ
+                  행운의 로또 번호
                 </button>
                 <br />
-                <div id="lotteryClick">click here</div>
+                <div id="lotteryClick"></div>
                 <br />
                 <h3 id="lottery1"></h3>
                 <h3 id="lottery2"></h3>
@@ -493,21 +565,124 @@
             </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3" onclick="buttonClicked()"></div>
+            <div class="box box3 boxB" onclick="buttonClicked()">
+              <div
+                class="progress"
+                role="progressbar"
+                aria-label="Basic example"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 500px"
+              >
+                <div class="progress-bar" style="width: 25%"></div>
+              </div>
+              <div id="timer"></div>
+
+              <button id="stopTimer">타이머 멈추기</button>
+            </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box3" onclick="buttonClicked()"></div>
+            <div class="box box3 boxC" onclick="buttonClicked()">
+              <div class="progress-stacked" style="width: 300px">
+                <div
+                  class="progress pb1"
+                  role="progressbar"
+                  aria-label="Segment one"
+                  aria-valuenow="15"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 50%; min-width: 50%"
+                >
+                  <div class="progress-bar"></div>
+                </div>
+                <div
+                  class="progress pb2"
+                  role="progressbar"
+                  aria-label="Segment two"
+                  aria-valuenow="30"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 50%"
+                >
+                  <div class="progress-bar bg-success"></div>
+                </div>
+                <div
+                  class="progress pb3"
+                  role="progressbar"
+                  aria-label="Segment three"
+                  aria-valuenow="20"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 0%"
+                >
+                  <div class="progress-bar bg-info"></div>
+                </div>
+              </div>
+
+              <!-- <div id="prtimer"></div> -->
+
+              <button id="prstopTimer">타이머 멈추기</button>
+            </div>
           </div>
-          <div class="b-example-divider"></div>
+          <!-- <div class="b-example-divider"></div> -->
           <!--다음줄 box-->
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
+            <div style="display: block; text-align: center" class="box box3">
+              <br />
+              <br />
+              <div id="dDayHead">
+                <img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/emoji/48/calendar-emoji.png"
+                  alt="calendar-emoji"
+                />
+                D-Day
+              </div>
+              <br />
+              <input type="date" id="dday-input" />
+              <br />
+              <br />
+              <button onclick="calculateRemainingDays()" id="remainingDays">
+                계산하기
+              </button>
+              <button onclick="dDayReset()" id="ResetDday">재설정</button>
+              <p id="result"></p>
+              <br />
+            </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
+            <div
+              style="background-color: rgba(0, 0, 0, 0)"
+              class="box box3 boxC"
+            >
+              <div id="calendar">
+                <div
+                  style="display: flex; align-items: center; opacity: 0.9"
+                  id="calendar_header"
+                >
+                  <i class="icon-chevron-left"></i>
+                  <h1></h1>
+                  <i class="icon-chevron-right"></i>
+                </div>
+                <div id="calendar_weekdays"></div>
+                <div id="calendar_content"></div>
+              </div>
+            </div>
           </div>
           <div class="col-sm-6 col-lg-4 mb-1">
-            <div class="box box4"></div>
+            <div class="box box3">
+              <div
+                style="
+                  width: 500px;
+                  height: 300px;
+                  border-radius: 10%;
+                  opacity: 0.8;
+                "
+                id="map"
+              ></div>
+            </div>
           </div>
           <div class="b-example-divider"></div>
           <div class="b-example-divider"></div>
@@ -516,12 +691,21 @@
         </div>
       </div>
     </div>
+    <script src="./js/map.js"></script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
+    ></script>
+    <script src="./js/calendar.js"></script>
     <script src="./js/engWord.js"></script>
     <script src="./js/color.js"></script>
     <script src="./js/food.js"></script>
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
+
+    <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
@@ -646,6 +830,160 @@
 
     <!-- 상단에 현재 날짜 출력 js 파일 -->
     <script src="./js/currentDate.js"></script>
+
+    <script>
+      //페이지 가장 하단에 문구 출력
+      // 랜덤한 문구 목록
+      const messages = [
+        "좋은 아침입니다!",
+        "Guten Morgen!",
+        "¡Buenos días!",
+        "おはようございます！",
+        "Bonjour !",
+      ];
+
+      // 랜덤한 문구 선택 및 출력
+      function displayRandomMessage() {
+        const messageContainer = document.querySelector(".day_msg");
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage = messages[randomIndex];
+        messageContainer.textContent = randomMessage;
+      }
+
+      // 페이지 로드 시 랜덤한 문구 출력
+      window.addEventListener("load", displayRandomMessage);
+    </script>
+    <script>
+      function buttonClicked() {
+        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      }
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let time = 120;
+      let maxTime = time;
+      let min = 0;
+      let sec = 0;
+      let percent = 0;
+
+      $(document).ready(function () {
+        timerID = setInterval(function () {
+          time -= 1;
+          percent = ((100 / maxTime) * time).toFixed(0);
+          min = Math.floor(time / 60);
+          sec = ((time / 60 - min) * 60).toFixed(0);
+          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
+          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(timerID);
+        });
+      });
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let prtime = 10;
+      let prmaxTime = prtime;
+      let prmin = 0;
+      let prsec = 0;
+      let prpercent = 0;
+
+      $(document).ready(function () {
+        prtimerID = setInterval(function () {
+          prtime -= 1;
+          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
+          prmin = Math.floor(prtime / 60);
+          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
+          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
+          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
+          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(prtimerID);
+        });
+      });
+    </script>
+
+    <script>
+      //페이지 가장 하단에 문구 출력
+      // 랜덤한 문구 목록
+      const messages = [
+        "좋은 아침입니다!",
+        "Guten Morgen!",
+        "¡Buenos días!",
+        "おはようございます！",
+        "Bonjour !",
+      ];
+
+      // 랜덤한 문구 선택 및 출력
+      function displayRandomMessage() {
+        const messageContainer = document.querySelector(".day_msg");
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage = messages[randomIndex];
+        messageContainer.textContent = randomMessage;
+      }
+
+      // 페이지 로드 시 랜덤한 문구 출력
+      window.addEventListener("load", displayRandomMessage);
+    </script>
+    <script>
+      function buttonClicked() {
+        // 버튼 클릭 시 실행할 동작을 추가하세요.
+      }
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let time = 120;
+      let maxTime = time;
+      let min = 0;
+      let sec = 0;
+      let percent = 0;
+
+      $(document).ready(function () {
+        timerID = setInterval(function () {
+          time -= 1;
+          percent = ((100 / maxTime) * time).toFixed(0);
+          min = Math.floor(time / 60);
+          sec = ((time / 60 - min) * 60).toFixed(0);
+          $("#timer").html(`${min}분${sec}초 ${percent}남았습니다`);
+          $(".boxB .progress-bar").attr("style", `width: ${percent}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(timerID);
+        });
+      });
+    </script>
+
+    <!-- 타이머 -->
+    <script>
+      let prtime = 10;
+      let prmaxTime = prtime;
+      let prmin = 0;
+      let prsec = 0;
+      let prpercent = 0;
+
+      $(document).ready(function () {
+        prtimerID = setInterval(function () {
+          prtime -= 1;
+          prpercent = ((100 / prmaxTime) * prtime).toFixed(0);
+          prmin = Math.floor(prtime / 60);
+          prsec = ((prtime / 60 - prmin) * 60).toFixed(0);
+          $("#prtimer").html(`${prmin}분${prsec}초 ${prpercent}남았습니다`);
+          $(".pb3").attr("style", `width: ${100 - prpercent}%`);
+          $(".pb2").attr("style", `width: ${prpercent - 50}%`);
+        }, 1000);
+
+        $("#stopTimer").click(function () {
+          clearInterval(prtimerID);
+        });
+      });
+    </script>
 
     <!-- 하단 문구 출력 js 파일 -->
     <script src="./js/dayMsg.js"></script>
