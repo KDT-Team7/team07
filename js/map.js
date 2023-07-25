@@ -21,7 +21,7 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         },
-        zoom: 14,
+        zoom: 13,
       };
 
       // 지도 생성

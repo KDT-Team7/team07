@@ -79,6 +79,9 @@
         font-size: 48px;
         color: #ffffff;
       }
+      #scroll1::-webkit-scrollbar {
+        display: none;
+      }
     </style>
 
     <style>
@@ -165,6 +168,13 @@
       }
       /* 로또 번호 */
       #ul > li > p {
+        display: inline-block;
+      }
+      #ul1 {
+        position: absolute;
+        left: 15%;
+      }
+      #ul1 > li > p {
         display: inline-block;
       }
       #lottery1 > p {
@@ -435,37 +445,43 @@
           </div>
           <!-- main box -->
           <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
-            <div class="align-items0 box box1">
-              <div class="toDoList">
+            <div
+              style="overflow-y: scroll; position: relative"
+              class="align-items0 box box1"
+              id="scroll1"
+            >
+              <div style="overflow: hidden" class="toDoList">
                 <br />
-                <h3 class="animate__animated animate__bounce" id="todoHeader">
-                  <img
-                    width="48"
-                    height="48"
-                    src="https://img.icons8.com/emoji/48/man-technologyst.png"
-                    alt="man-technologyst"
+                <div style="text-align: center">
+                  <h3 class="animate__animated animate__bounce" id="todoHeader">
+                    <img
+                      width="48"
+                      height="48"
+                      src="https://img.icons8.com/emoji/48/man-technologyst.png"
+                      alt="man-technologyst"
+                    />
+                    오늘의 할 일
+                  </h3>
+                  <input
+                    id="ToDoListValue"
+                    type="text"
+                    placeholder="오늘의 리스트를 써주세요!"
+                    onkeydown="handleKeyDown(event)"
                   />
-                  오늘의 할 일
-                </h3>
-                <input
-                  id="ToDoListValue"
-                  type="text"
-                  placeholder="오늘의 리스트를 써주세요!"
-                  onkeydown="handleKeyDown(event)"
-                />
-                <button
-                  style="border-radius: 15%"
-                  id="toDoBtn"
-                  onclick="addToDoList()"
-                >
-                  <img
-                    width="30"
-                    height="30"
-                    src="https://img.icons8.com/emoji/48/plus-emoji.png"
-                    alt="plus-emoji"
-                  />
-                </button>
-                <ul style="font-weight: 600" id="ul">
+                  <button
+                    style="border-radius: 15%"
+                    id="toDoBtn"
+                    onclick="addToDoList()"
+                  >
+                    <img
+                      width="30"
+                      height="30"
+                      src="https://img.icons8.com/emoji/48/plus-emoji.png"
+                      alt="plus-emoji"
+                    />
+                  </button>
+                </div>
+                <ul style="font-weight: 600" id="ul1">
                   <div style="height: 5px"></div>
                 </ul>
               </div>
@@ -806,11 +822,16 @@
       </div>
     </div>
     <script src="./js/map.js"></script>
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
-    ></script>
+    <script>
+      const API_KEY = "AIzaSyDEd6i2cB-Dx22HMirE4OjLFDKF6MMWKmA";
+      // 새 script 엘리먼트를 생성하고 API 키를 포함하여 추가합니다.
+      const scriptElement = document.createElement("script");
+      scriptElement.async = true;
+      scriptElement.defer = true;
+      scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`;
+      document.head.appendChild(scriptElement);
+    </script>
+
     <script src="./js/timer.js"></script>
     <script src="./js/calendar.js"></script>
     <script src="./js/engWord.js"></script>
@@ -819,7 +840,6 @@
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
-
     <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
@@ -953,7 +973,6 @@
     <script src="./js/currentDate.js"></script>
 
     <script>
-
       function buttonClicked() {
         // 버튼 클릭 시 실행할 동작을 추가하세요.
       }
