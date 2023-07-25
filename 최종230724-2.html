@@ -806,11 +806,16 @@
       </div>
     </div>
     <script src="./js/map.js"></script>
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"
-    ></script>
+    <script>
+      const API_KEY = "AIzaSyDEd6i2cB-Dx22HMirE4OjLFDKF6MMWKmAABC";
+      // 새 script 엘리먼트를 생성하고 API 키를 포함하여 추가합니다.
+      const scriptElement = document.createElement("script");
+      scriptElement.async = true;
+      scriptElement.defer = true;
+      scriptElement.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`;
+      document.head.appendChild(scriptElement);
+    </script>
+
     <script src="./js/timer.js"></script>
     <script src="./js/calendar.js"></script>
     <script src="./js/engWord.js"></script>
@@ -819,7 +824,6 @@
     <script src="./js/phrase.js"></script>
     <script src="./js/TodoList.js"></script>
     <script src="./js/lottery.js"></script>
-
     <script src="./js/dDay.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
@@ -953,7 +957,6 @@
     <script src="./js/currentDate.js"></script>
 
     <script>
-
       function buttonClicked() {
         // 버튼 클릭 시 실행할 동작을 추가하세요.
       }
