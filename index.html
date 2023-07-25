@@ -167,6 +167,13 @@
       #ul > li > p {
         display: inline-block;
       }
+      #ul1 {
+        position: absolute;
+        left: 15%;
+      }
+      #ul1 > li > p {
+        display: inline-block;
+      }
       #lottery1 > p {
         display: inline-block;
       }
@@ -435,37 +442,42 @@
           </div>
           <!-- main box -->
           <div class="col-sm-12 col-md-6 col-lg-6 mb-1">
-            <div class="align-items0 box box1">
-              <div class="toDoList">
+            <div
+              style="overflow-y: scroll; position: relative"
+              class="align-items0 box box1"
+            >
+              <div style="overflow: hidden" class="toDoList">
                 <br />
-                <h3 class="animate__animated animate__bounce" id="todoHeader">
-                  <img
-                    width="48"
-                    height="48"
-                    src="https://img.icons8.com/emoji/48/man-technologyst.png"
-                    alt="man-technologyst"
+                <div style="text-align: center">
+                  <h3 class="animate__animated animate__bounce" id="todoHeader">
+                    <img
+                      width="48"
+                      height="48"
+                      src="https://img.icons8.com/emoji/48/man-technologyst.png"
+                      alt="man-technologyst"
+                    />
+                    오늘의 할 일
+                  </h3>
+                  <input
+                    id="ToDoListValue"
+                    type="text"
+                    placeholder="오늘의 리스트를 써주세요!"
+                    onkeydown="handleKeyDown(event)"
                   />
-                  오늘의 할 일
-                </h3>
-                <input
-                  id="ToDoListValue"
-                  type="text"
-                  placeholder="오늘의 리스트를 써주세요!"
-                  onkeydown="handleKeyDown(event)"
-                />
-                <button
-                  style="border-radius: 15%"
-                  id="toDoBtn"
-                  onclick="addToDoList()"
-                >
-                  <img
-                    width="30"
-                    height="30"
-                    src="https://img.icons8.com/emoji/48/plus-emoji.png"
-                    alt="plus-emoji"
-                  />
-                </button>
-                <ul style="font-weight: 600" id="ul">
+                  <button
+                    style="border-radius: 15%"
+                    id="toDoBtn"
+                    onclick="addToDoList()"
+                  >
+                    <img
+                      width="30"
+                      height="30"
+                      src="https://img.icons8.com/emoji/48/plus-emoji.png"
+                      alt="plus-emoji"
+                    />
+                  </button>
+                </div>
+                <ul style="font-weight: 600" id="ul1">
                   <div style="height: 5px"></div>
                 </ul>
               </div>
