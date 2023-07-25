@@ -11,8 +11,8 @@ fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`)
     const humidity = data.main.humidity.toFixed(1);
     const wind_speed = data.wind.speed.toFixed(1);
     const description = data.weather[0].description;
-    //const id = data.weather[0].id;
-    const id = 800;
+    const id = data.weather[0].id;
+    
 
     let iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
