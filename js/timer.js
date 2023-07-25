@@ -113,7 +113,10 @@ $(".startTimer").on("click", function () {
         `${Math.floor(time1Time / 60)}분${time1Time % 60}초`
       );
       updateBar1(time1Time, totalTime, ".pb1");
-    } else clearInterval(prtimerID);
+    } else {
+      resetTimer();
+      clearInterval(prtimerID);
+    }
   }, 1000);
 
   $("#prstopTimer").click(function () {
@@ -124,13 +127,16 @@ $(".startTimer").on("click", function () {
   });
 });
 
-$(".resetTimer").on("click", function () {
+//$(".resetTimer").on("click", resetTimer());
+
+function resetTimer() {
   $(".time").attr("disabled", false);
   $(".startTimer").text("시작");
   $(".startTimer").attr("disabled", false);
-  $(".time1").text("일정1");
-  $(".time2").text("일정2");
-  $(".time3").text("일정3");
+  $(".startTimer").attr("style", "background-color: black");
+  $(".time3").text("일정 1");
+  $(".time2").text("일정 2");
+  $(".time1").text("일정 3");
   time1Time = 0;
   time2Time = 0;
   time3Time = 0;
@@ -138,4 +144,18 @@ $(".resetTimer").on("click", function () {
   updateBar(time1Time, totalTime, ".pb1");
   updateBar(time2Time, totalTime, ".pb2");
   updateBar(time3Time, totalTime, ".pb3");
-});
+}
+
+function passTimer() {
+  if (time3Time > 0) {
+    time2Time += time3Time;
+    time3Time = 0;
+    updateBar(time2Time, totalTime, ".pb2");
+    updateBar(time3Time, totalTime, ".pb3");
+  } else if (time2Time > 0) {
+    time1Time += time2Time;
+    time2Time = 0;
+    updateBar(time1Time, totalTime, ".pb1");
+    updateBar(time2Time, totalTime, ".pb2");
+  }
+}
