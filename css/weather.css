@@ -1,0 +1,104 @@
+/* 날씨 box CSS */
+        #current {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 50%;
+          height: 250px;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+
+        #current .iconDes {
+          text-align: center;
+          margin-left: 10%;
+          font-weight: 1000;
+        }
+
+        #current .tempFeels {
+          text-align: left;
+          margin-right: 5%;
+        }
+
+        .tempFeels h1 {
+          font-size: 50px;
+          font-weight: 1000;
+        }
+        .tempFeels p {
+          font-weight: 500;
+        }
+        #current .misc {
+          text-align: left;
+          font-weight: 1000;
+
+        }
+
+        #forecast {
+          position: absolute;
+          top: 10px;
+          left: 50%;
+          width: 50%;
+          height: 250px;
+          font-weight: 1000;
+
+        }
+
+        #forecast .row {
+          width: 10vw;
+          min-width: 50px;
+          height: 125px;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          text-align: center;
+          font-size: 10px;
+        }
+        #forecast p {
+          margin: 0;
+          background-color: rgba(255, 255, 255, 0.522)"
+        }
+
+        #forecast img {
+          width: 80px;
+          height: 80px;
+        }
+
+/* 날씨 반응형 */
+
+      @media screen and (max-width: 1200px) {
+        #current .misc {
+          font-size: 13px;
+        }
+
+      }
+
+        @media screen and (max-width: 992px) {
+          
+
+          #current .misc {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: 20px;
+          }
+        }
+
+        @media screen and (max-width: 768px) {
+          #forecast {
+            visibility: hidden;
+          }
+
+          #current .iconDes {
+            margin-left: 15%
+          }
+
+          #current .tempFeels{
+            margin-left: 15%
+          }
+
+        }
+   
