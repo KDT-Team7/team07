@@ -79,6 +79,9 @@
         font-size: 48px;
         color: #ffffff;
       }
+      #scroll1::-webkit-scrollbar {
+        display: none;
+      }
     </style>
 
     <style>
@@ -445,6 +448,7 @@
             <div
               style="overflow-y: scroll; position: relative"
               class="align-items0 box box1"
+              id="scroll1"
             >
               <div style="overflow: hidden" class="toDoList">
                 <br />
@@ -819,7 +823,7 @@
     </div>
     <script src="./js/map.js"></script>
     <script>
-      const API_KEY = "AIzaSyDEd6i2cB-Dx22HMirE4OjLFDKF6MMWKmAABC";
+      const API_KEY = "AIzaSyDEd6i2cB-Dx22HMirE4OjLFDKF6MMWKmA";
       // 새 script 엘리먼트를 생성하고 API 키를 포함하여 추가합니다.
       const scriptElement = document.createElement("script");
       scriptElement.async = true;
