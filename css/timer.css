@@ -13,6 +13,18 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
   width: 80%;
+  position: relative;
+  bottom: 7px;
+}
+
+.timerBarSection {
+  position: relative;
+  bottom: 7px;
+}
+
+.buttonSection {
+  position: relative;
+  bottom: 9px;
 }
 
 .timeBox {
