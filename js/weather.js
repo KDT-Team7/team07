@@ -11,9 +11,9 @@ fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`)
     const humidity = data.main.humidity.toFixed(1);
     const wind_speed = data.wind.speed.toFixed(1);
     const description = data.weather[0].description;
-    //const id = data.weather[0].id;
+    const id = data.weather[0].id;
     //비 
-    const id = 300;
+    //const id = 300;
     //번개 
     //const id = 1;
     //안개 
