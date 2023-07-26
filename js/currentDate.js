@@ -4,7 +4,7 @@ function setCurrentDateText() {
   const month = currentDate.getMonth() + 1;
   const day = currentDate.getDate();
   const dateTextElement = document.getElementById("date-text");
-  dateTextElement.textContent = month + "/" + day;
+  dateTextElement.textContent = month + "월" + day;
 }
 
 // 페이지 로드 시 현재 날짜 텍스트 설정

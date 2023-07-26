@@ -88,7 +88,12 @@ function updateBar1(numTime, totTime, prName) {
 
 $(".startTimer").on("click", function () {
   console.log(time3Time);
-  $(".startTimer").text("시작");
+  $(".startTimer").html(`<img
+  width="30"
+  height="30"
+  src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"
+  alt="play--v1"
+/>시작`);
   $(".startTimer").attr("disabled", true);
   $(".startTimer").attr("style", "background-color: darkgrey");
   let prtimerID = setInterval(function () {
@@ -121,7 +126,12 @@ $(".startTimer").on("click", function () {
 
   $("#prstopTimer").click(function () {
     clearInterval(prtimerID);
-    $(".startTimer").text("이어서");
+    $(".startTimer").html(`<img
+  width="30"
+  height="30"
+  src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"
+  alt="play--v1"
+/>이어서`);
     $(".startTimer").attr("disabled", false);
     $(".startTimer").attr("style", "background-color: black");
   });
@@ -131,7 +141,12 @@ $(".startTimer").on("click", function () {
 
 function resetTimer() {
   $(".time").attr("disabled", false);
-  $(".startTimer").text("시작");
+  $(".startTimer").html(`<img
+  width="30"
+  height="30"
+  src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"
+  alt="play--v1"
+/>시작`);
   $(".startTimer").attr("disabled", false);
   $(".startTimer").attr("style", "background-color: black");
   $(".time3").text("일정 1");

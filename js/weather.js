@@ -12,6 +12,15 @@ fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`)
     const wind_speed = data.wind.speed.toFixed(1);
     const description = data.weather[0].description;
     const id = data.weather[0].id;
+    //비 
+    //const id = 300;
+    //번개 
+    //const id = 1;
+    //안개 
+    //const id = 700;
+    //맑음 
+    //const id = 800;
+    
 
     let iconURL = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
@@ -36,31 +45,58 @@ fetch(`${apiUrl}?q=seoul&appid=${apiKey}&units=metric&lang=kr`)
           
         `);
 
-    if (id >= 300 && id < 532) {
-      $("video").html(`
-                <source src="./weather/mist.mp4" type="video/mp4" />
-                <strong>Your browser does not support the video tag.</strong>
+    weatherBackground(id);
 
-            `);
-    } else if (id == 800) {
-      $("video").html(`
-                <source src="./weather/sunny.mp4" type="video/mp4" />
-                <strong>Your browser does not support the video tag.</strong>
-            `);
-    } else if (id < 250) {
-      $("video").html(`
+    function weatherBackground(id) {
+      console.log("hi!");
+      if (id >= 300 && id < 532) {
+        if (matchMedia("screen and (min-width: 1510px)").matches) {
+          $("video").html(`
+                  <source src="./weather/rain.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        } else {
+          $("video").html(`
+                  <source src="./weather/vertRainy.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        }
+      } else if (id == 800) {
+        if (matchMedia("screen and (min-width: 1510px)").matches) {
+          $("video").html(`
+                  <source src="./weather/sunny.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        } else {
+          $("video").html(`
+                  <source src="./weather/vertSunny.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        }
+      } else if (id < 250) {
+        $("video").html(`
                 <source src="./weather/thunder.mp4" type="video/mp4" />
                 <strong>Your browser does not support the video tag.</strong>`);
-    } else if (id >= 700 && id < 800) {
-      $("video").html(`
-                <source src="./weather/mist.mp4" type="video/mp4" />
-                <strong>Your browser does not support the video tag.</strong>`);
-    } else if (id > 800) {
-      $("video").html(`
-                <source src="./weather/cloudy.mp4" type="video/mp4" />
-                <strong>Your browser does not support the video tag.</strong>`);
+      } else if (id >= 700 && id < 800) {
+        if (matchMedia("screen and (min-width: 1510px)").matches) {
+          $("video").html(`
+                  <source src="./weather/mist.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        } else {
+          $("video").html(`
+                  <source src="./weather/vertMist.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        }
+      } else if (id > 800) {
+        if (matchMedia("screen and (min-width: 1510px)").matches) {
+          $("video").html(`
+                  <source src="./weather/Cloudy.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        } else {
+          $("video").html(`
+                  <source src="./weather/vertCloudy.mp4" type="video/mp4" />
+                  <strong>Your browser does not support the video tag.</strong>`);
+        }
+      }
     }
   })
+
   .catch((error) => {
     // Handle any errors
     console.error("Error:", error);
