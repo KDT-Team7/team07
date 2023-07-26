@@ -213,8 +213,14 @@
 
       .banner_main {
         font-family: "TAEBAEKmilkyway";
-        background-color: transparent;
-        font-weight: 500;
+        font-weight: 900;
+        height: 7vh;
+        width: 84vw;
+        text-align: center;
+        border-radius: 10%;
+
+        background-color: rgb(243, 238, 238, 0.85);
+        margin-right: 2.5%;
       }
       .day_msg {
         font-family: "Yeongdo-Rg";
@@ -564,9 +570,8 @@
                   onfocus="this.select()"
                 />
 
-
                 <button class="time time3" onclick="putTime(this)">
-                <img
+                  <img
                     width="48"
                     height="48"
                     src="https://img.icons8.com/emoji/48/stopwatch-emoji.png"
@@ -590,7 +595,7 @@
                     src="https://img.icons8.com/emoji/48/stopwatch-emoji.png"
                     alt="stopwatch-emoji"
                   />
-                 일정 3
+                  일정 3
                 </button>
               </div>
 
@@ -661,23 +666,27 @@
               </div>
 
               <div class="buttonSection">
-
-                <button class="timer startTimer" id="prstartTimer"><img
+                <button class="timer startTimer" id="prstartTimer">
+                  <img
                     width="30"
                     height="30"
                     src="https://img.icons8.com/ios-filled/50/FFFFFF/play--v1.png"
                     alt="play--v1"
-                  />시작</button>
-                <button class="timer stopTimer" id="prstopTimer"><img
+                  />시작
+                </button>
+                <button class="timer stopTimer" id="prstopTimer">
+                  <img
                     width="30"
                     height="30"
                     src="https://img.icons8.com/ios-filled/50/FFFFFF/pause--v1.png"
                     alt="pause--v1"
-                  />정지</button>
+                  />정지
+                </button>
                 <button class="timer passTimer" onclick="passTimer()">
                   다음 일정
                 </button>
-                <button class="timer resetTimer" onclick="resetTimer()"><img
+                <button class="timer resetTimer" onclick="resetTimer()">
+                  <img
                     width="30"
                     height="30"
                     src="https://img.icons8.com/ios-filled/50/FFFFFF/recurring-appointment.png"
